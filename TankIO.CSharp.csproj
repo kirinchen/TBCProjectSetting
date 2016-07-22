@@ -1433,7 +1433,9 @@
     <Compile Include="Assets\TankIO\Script\Item\ItemInitDto.cs" />
     <Compile Include="Assets\TankIO\Script\Item\ItemSyncManager.cs" />
     <Compile Include="Assets\TankIO\Script\Item\TouchEnterDto.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\MobileButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileInputer.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\ReloadButton.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiDamgeDto.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFakePlayer.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFireDto.cs" />
