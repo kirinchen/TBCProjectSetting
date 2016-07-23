@@ -109,6 +109,9 @@
     <Reference Include="websocket-sharp">
       <HintPath>Assets\SurfUnityBattelService\StompClient\websocket-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="JarResolverLib">
+      <HintPath>Assets\PlayServicesResolver\Editor\JarResolverLib.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-UnityScript">
       <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
     </Reference>
@@ -129,6 +132,16 @@
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCMenu.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCTouchPadInspector.cs" />
     <Compile Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\GAuiEditor.cs" />
+    <Compile Include="Assets\GoogleMobileAds\Editor\CocoaPodHelper.cs" />
+    <Compile Include="Assets\GoogleMobileAds\Editor\PostProcessor.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\AdMobDependencies.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\DefaultResolver.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\IResolver.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\PlayServicesResolver.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\ResolverVer1_1.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\ResolverVer1_2.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\SampleDependencies.cs" />
+    <Compile Include="Assets\PlayServicesResolver\Editor\SettingsDialog.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Editor\EditorUtility.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Editor\I_CameraControlEditor.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Editor\I_CollectibleEditor.cs" />
@@ -173,6 +186,7 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Readme.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
+    <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\SurfUnityBattelService\JsonDotNet\ReadMe.txt" />
     <None Include="Assets\TDSTK\Model\BlendColorsOverlayTexture.shader" />
     <None Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
