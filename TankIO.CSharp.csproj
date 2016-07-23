@@ -73,6 +73,9 @@
     <Reference Include="websocket-sharp">
       <HintPath>Assets\SurfUnityBattelService\StompClient\websocket-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements.Editor">
+      <HintPath>Assets\UnityAds\UnityEngine.Advertisements.Editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Authentication\Credentials.cs" />
@@ -1447,6 +1450,7 @@
     <Compile Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\PostEffectsBase.cs" />
     <Compile Include="Assets\TDSTK\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\TankIO\Script\Ad\Admober.cs" />
+    <Compile Include="Assets\TankIO\Script\Ad\UnityAdser.cs" />
     <Compile Include="Assets\TankIO\Script\BuffAndConnect.cs" />
     <Compile Include="Assets\TankIO\Script\Constant.cs" />
     <Compile Include="Assets\TankIO\Script\Dto\EffectDto.cs" />
