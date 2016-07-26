@@ -132,6 +132,8 @@ public class ETCJoystick : ETCBase, IPointerEnterHandler, IDragHandler, IBeginDr
             isNoOffsetThumb = value;
         }
     }
+
+    public bool focused = true;
     #endregion
 
     #region Inspector
@@ -678,7 +680,7 @@ public class ETCJoystick : ETCBase, IPointerEnterHandler, IDragHandler, IBeginDr
 
     }
 
-    private int GetTouchCount() {
+    public static int GetTouchCount() {
 #if ((UNITY_ANDROID || UNITY_IOS || UNITY_WINRT || UNITY_BLACKBERRY) && !UNITY_EDITOR)
 		return Input.touchCount;
 #else
