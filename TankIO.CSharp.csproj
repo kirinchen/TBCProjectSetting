@@ -1450,6 +1450,7 @@
     <Compile Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\PostEffectsBase.cs" />
     <Compile Include="Assets\TDSTK\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\TankIO\Script\Ad\Admober.cs" />
+    <Compile Include="Assets\TankIO\Script\Ad\UnityAds.cs" />
     <Compile Include="Assets\TankIO\Script\Ad\UnityAdser.cs" />
     <Compile Include="Assets\TankIO\Script\BuffAndConnect.cs" />
     <Compile Include="Assets\TankIO\Script\Constant.cs" />
@@ -1480,8 +1481,11 @@
     <Compile Include="Assets\TankIO\Script\Item\ItemInitDto.cs" />
     <Compile Include="Assets\TankIO\Script\Item\ItemSyncManager.cs" />
     <Compile Include="Assets\TankIO\Script\Item\TouchEnterDto.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\ExpRewarder.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\GotExpButton.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\InputerSwitcher.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileButton.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\MobileClickShootInputer.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileInputer.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileManager.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileRestartButton.cs" />
