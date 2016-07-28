@@ -1490,6 +1490,7 @@
     <Compile Include="Assets\TankIO\Script\Mobile\MobileManager.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileRestartButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\ReloadButton.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\TestInput.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiDamgeDto.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFakePlayer.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFireDto.cs" />
