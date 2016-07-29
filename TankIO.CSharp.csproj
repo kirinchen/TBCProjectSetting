@@ -1339,6 +1339,7 @@
     <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClient.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClientAll.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClientCs.cs" />
+    <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClientDebug.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\UidUtils.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\WsResponse.cs" />
     <Compile Include="Assets\SurfUnityBattelService\SyncCenter.cs" />
@@ -1449,6 +1450,7 @@
     <Compile Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\BlurOptimized.cs" />
     <Compile Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\PostEffectsBase.cs" />
     <Compile Include="Assets\TDSTK\Standard Assets\Utility\FPSCounter.cs" />
+    <Compile Include="Assets\TankIO\Animation\UiAnimFixer.cs" />
     <Compile Include="Assets\TankIO\Script\Ad\Admober.cs" />
     <Compile Include="Assets\TankIO\Script\Ad\UnityAds.cs" />
     <Compile Include="Assets\TankIO\Script\Ad\UnityAdser.cs" />
@@ -1483,6 +1485,7 @@
     <Compile Include="Assets\TankIO\Script\Item\TouchEnterDto.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\ExpRewarder.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\GotExpButton.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\InputCallbackSeter.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\InputerSwitcher.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileClickShootInputer.cs" />
@@ -1491,6 +1494,7 @@
     <Compile Include="Assets\TankIO\Script\Mobile\MobileRestartButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\ReloadButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\TestInput.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\TutorialsManager.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiDamgeDto.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFakePlayer.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFireDto.cs" />
