@@ -109,9 +109,6 @@
     <Reference Include="SampleClassLibrary">
       <HintPath>Assets\SurfUnityBattelService\JsonDotNet\Examples\Tests\TestModels\SampleClassLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\SurfUnityBattelService\StompClient\websocket-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
       <HintPath>Assets\UnityAds\UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>

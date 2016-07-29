@@ -70,9 +70,6 @@
     <Reference Include="SampleClassLibrary">
       <HintPath>Assets\SurfUnityBattelService\JsonDotNet\Examples\Tests\TestModels\SampleClassLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\SurfUnityBattelService\StompClient\websocket-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
       <HintPath>Assets\UnityAds\UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
@@ -1338,7 +1335,6 @@
     <Compile Include="Assets\SurfUnityBattelService\RemotePlayerRepo.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClient.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClientAll.cs" />
-    <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClientCs.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\StompClientDebug.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\UidUtils.cs" />
     <Compile Include="Assets\SurfUnityBattelService\StompClient\WsResponse.cs" />
@@ -1537,7 +1533,6 @@
     <Compile Include="Assets\TankIO\Script\Tank\PlayerGouster.cs" />
     <Compile Include="Assets\TankIO\Script\Tank\RandomPlaceBorner.cs" />
     <Compile Include="Assets\TankIO\Script\Tank\RemoteTank.cs" />
-    <Compile Include="Assets\TankIO\Script\TestIn.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\GlobalMethod.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\LuckyDrawer.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\URestApi.cs" />
