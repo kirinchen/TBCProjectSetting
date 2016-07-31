@@ -1487,12 +1487,14 @@
     <Compile Include="Assets\TankIO\Script\Mobile\MobileClickShootInputer.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileInputer.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileManager.cs" />
+    <Compile Include="Assets\TankIO\Script\Mobile\MobileModeLoader.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\MobileRestartButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\ReloadButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\TestInput.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\TutorialsManager.cs" />
     <Compile Include="Assets\TankIO\Script\Mode\GameMode.cs" />
-    <Compile Include="Assets\TankIO\Script\Mode\GameModeConfig.cs" />
+    <Compile Include="Assets\TankIO\Script\Mode\GameModeLoadHandler.cs" />
+    <Compile Include="Assets\TankIO\Script\Mode\ModeConfigs.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiDamgeDto.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFakePlayer.cs" />
     <Compile Include="Assets\TankIO\Script\Npc\AiFireDto.cs" />
