@@ -1492,7 +1492,6 @@
     <Compile Include="Assets\TankIO\Script\Mobile\MobileStartMenu.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\ModeTab.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\ModeTabset.cs" />
-    <Compile Include="Assets\TankIO\Script\Mobile\ReloadButton.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\TestInput.cs" />
     <Compile Include="Assets\TankIO\Script\Mobile\TutorialsManager.cs" />
     <Compile Include="Assets\TankIO\Script\Mode\GameMode.cs" />
@@ -1555,6 +1554,7 @@
     <Compile Include="Assets\TankIO\Script\Ui\LocalPlayerOverlay.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\PlayerOverlay.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\PlayerUiOverlayManager.cs" />
+    <Compile Include="Assets\TankIO\Script\Ui\ReloadButton.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\RemotePlayerOverlay.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\SafetyExitAlert.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\ScoreUI.cs" />
