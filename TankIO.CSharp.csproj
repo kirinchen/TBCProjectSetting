@@ -1552,6 +1552,7 @@
     <Compile Include="Assets\TankIO\Script\Ui\LevelExpMonitor.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\LoadingText.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\LocalPlayerOverlay.cs" />
+    <Compile Include="Assets\TankIO\Script\Ui\NameInputFilter.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\PlayerOverlay.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\PlayerUiOverlayManager.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\ReloadButton.cs" />
