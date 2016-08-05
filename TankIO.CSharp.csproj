@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -73,6 +75,12 @@
     <Reference Include="UnityEngine.Advertisements.Editor">
       <HintPath>Assets\UnityAds\UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TankIO.CSharp.Plugins.csproj">
+      <Project>{772AA235-61DC-67F7-49D3-71810EEC4CE6}</Project>
+      <Name>TankIO.CSharp.Plugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Authentication\Credentials.cs" />
@@ -1581,7 +1589,10 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Readme.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
-    <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\SurfUnityBattelService\JsonDotNet\ReadMe.txt" />
     <None Include="Assets\TDSTK\Model\BlendColorsOverlayTexture.shader" />
     <None Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
