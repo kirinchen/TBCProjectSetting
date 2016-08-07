@@ -1546,6 +1546,7 @@
     <Compile Include="Assets\TankIO\Script\Tank\RandomPlaceBorner.cs" />
     <Compile Include="Assets\TankIO\Script\Tank\RemoteTank.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\GlobalMethod.cs" />
+    <Compile Include="Assets\TankIO\Script\Tool\IntentUtils.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\LuckyDrawer.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\UI\Tab.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\UI\Tabset.cs" />
