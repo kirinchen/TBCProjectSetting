@@ -103,6 +103,21 @@
     <Reference Include="GUIAnimatorEditor">
       <HintPath>Assets\GUI Animator\GUI Animator for Unity UI\Plugins\Editor\GUIAnimatorEditor.dll</HintPath>
     </Reference>
+    <Reference Include="ArabicSupport">
+      <HintPath>Assets\I2\Localization\Dlls\ArabicSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.AccessControl">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.AccessControl.DLL</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Spreadsheets">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.Spreadsheets.dll</HintPath>
+    </Reference>
     <Reference Include="JarResolverLib">
       <HintPath>Assets\PlayServicesResolver\Editor\JarResolverLib.dll</HintPath>
     </Reference>
@@ -145,6 +160,35 @@
     <Compile Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\GAuiEditor.cs" />
     <Compile Include="Assets\GoogleMobileAds\Editor\CocoaPodHelper.cs" />
     <Compile Include="Assets\GoogleMobileAds\Editor\PostProcessor.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Export_CSV.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Export_Google.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Export_TextAssets.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Import_CSV.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Import_Google.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Import_TextAssets.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\DB\LocalizationEditorDB_Misc.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\EditorTools.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Google\GoogleTranslation.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Inspectors\LanguageSourceInspector.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Inspectors\LocalizeInspector.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Inspectors\ResourceManagerInspector.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Languages.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Sources.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Spreadsheet_Google.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Spreadsheet_Local.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Terms.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Terms_Description.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools_Categorize.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools_MergeTerms.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools_NoLocalized.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools_ParseTerms.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools_Scenes.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Localization\LocalizationEditor_Tools_Script.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\Tools_NGUI_to_I2.cs" />
+    <Compile Include="Assets\I2\Localization\Editor\UpgradeManager.cs" />
     <Compile Include="Assets\PlayServicesResolver\Editor\AdMobDependencies.cs" />
     <Compile Include="Assets\PlayServicesResolver\Editor\DefaultResolver.cs" />
     <Compile Include="Assets\PlayServicesResolver\Editor\IResolver.cs" />
@@ -197,6 +241,7 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Readme.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
+    <None Include="Assets\I2\Localization\readme.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\SurfUnityBattelService\JsonDotNet\ReadMe.txt" />

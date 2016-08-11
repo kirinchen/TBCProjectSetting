@@ -103,6 +103,21 @@
     <Reference Include="GUIAnimatorEditor">
       <HintPath>Assets\GUI Animator\GUI Animator for Unity UI\Plugins\Editor\GUIAnimatorEditor.dll</HintPath>
     </Reference>
+    <Reference Include="ArabicSupport">
+      <HintPath>Assets\I2\Localization\Dlls\ArabicSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.AccessControl">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.AccessControl.DLL</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Spreadsheets">
+      <HintPath>Assets\I2\Localization\Editor\Google\Libraries\Google.GData.Spreadsheets.dll</HintPath>
+    </Reference>
     <Reference Include="JarResolverLib">
       <HintPath>Assets\PlayServicesResolver\Editor\JarResolverLib.dll</HintPath>
     </Reference>
@@ -138,6 +153,7 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Readme.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
+    <None Include="Assets\I2\Localization\readme.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\SurfUnityBattelService\JsonDotNet\ReadMe.txt" />
