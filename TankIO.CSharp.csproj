@@ -1575,6 +1575,7 @@
     <Compile Include="Assets\TankIO\Script\Tool\UI\Tab.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\UI\Tabset.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\URestApi.cs" />
+    <Compile Include="Assets\TankIO\Script\Ui\AlertDialog.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\AttrLister.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\CreateBackButton.cs" />
     <Compile Include="Assets\TankIO\Script\Ui\DialogManager.cs" />
