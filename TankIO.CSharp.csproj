@@ -1579,6 +1579,7 @@
     <Compile Include="Assets\TankIO\Script\Tank\PlayerGouster.cs" />
     <Compile Include="Assets\TankIO\Script\Tank\RandomPlaceBorner.cs" />
     <Compile Include="Assets\TankIO\Script\Tank\RemoteTank.cs" />
+    <Compile Include="Assets\TankIO\Script\Tool\GeneralSharingiOSBridge.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\GlobalMethod.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\I18nText.cs" />
     <Compile Include="Assets\TankIO\Script\Tool\IntentUtils.cs" />
