@@ -1567,6 +1567,7 @@
      <Compile Include="Assets\tankio\Script\Record\ScoreCoinResulter.cs" />
      <Compile Include="Assets\tankio\Script\Record\TankRecord.cs" />
      <Compile Include="Assets\tankio\Script\RemoteObjectCreater.cs" />
+     <Compile Include="Assets\tankio\Script\SingleMission\MissionManager.cs" />
      <Compile Include="Assets\tankio\Script\Tank\IntoInvincibleTask.cs" />
      <Compile Include="Assets\tankio\Script\Tank\LocalTank.cs" />
      <Compile Include="Assets\tankio\Script\Tank\LocalTankFirePoster.cs" />

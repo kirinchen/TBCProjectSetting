@@ -1600,6 +1600,8 @@
     <Compile Include="Assets\tankio\Script\Record\ScoreCoinResulter.cs" />
     <Compile Include="Assets\tankio\Script\Record\TankRecord.cs" />
     <Compile Include="Assets\tankio\Script\RemoteObjectCreater.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\MissionManager.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\TankSwitcher.cs" />
     <Compile Include="Assets\tankio\Script\Tank\IntoInvincibleTask.cs" />
     <Compile Include="Assets\tankio\Script\Tank\LocalTank.cs" />
     <Compile Include="Assets\tankio\Script\Tank\LocalTankFirePoster.cs" />
@@ -1627,7 +1629,6 @@
     <Compile Include="Assets\tankio\Script\Tool\UI\Tab.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Tabset.cs" />
     <Compile Include="Assets\tankio\Script\Tool\URestApi.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\AttrLister.cs" />
     <Compile Include="Assets\tankio\Script\Ui\BuyPaintButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\BuyWeaponButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\CreateBackButton.cs" />
@@ -1638,19 +1639,22 @@
     <Compile Include="Assets\tankio\Script\Ui\DialogManager.cs" />
     <Compile Include="Assets\tankio\Script\Ui\ExitButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\FakePlayerOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Hud\AttrLister.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Hud\LevelExpMonitor.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Hud\SafetyExitAlert.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Hud\ScoreUI.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Hud\WeaponUI.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Leaderboard.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\LevelExpMonitor.cs" />
     <Compile Include="Assets\tankio\Script\Ui\LoadingText.cs" />
     <Compile Include="Assets\tankio\Script\Ui\LocalPlayerOverlay.cs" />
     <Compile Include="Assets\tankio\Script\Ui\NameInputFilter.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\PlayerModelShower.cs" />
     <Compile Include="Assets\tankio\Script\Ui\PlayerOverlay.cs" />
     <Compile Include="Assets\tankio\Script\Ui\PlayerUiOverlayManager.cs" />
     <Compile Include="Assets\tankio\Script\Ui\ReAttrButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\ReTankNamer.cs" />
     <Compile Include="Assets\tankio\Script\Ui\ReloadButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\RemotePlayerOverlay.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\SafetyExitAlert.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\ScoreUI.cs" />
     <Compile Include="Assets\tankio\Script\Ui\SoundOnOffButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\StartMenu.cs" />
     <Compile Include="Assets\tankio\Script\Ui\TankCreator.cs" />
@@ -1659,7 +1663,6 @@
     <Compile Include="Assets\tankio\Script\Ui\TurnOnOffButton.cs" />
     <Compile Include="Assets\tankio\Script\Ui\VersionUI.cs" />
     <Compile Include="Assets\tankio\Script\Ui\WeaponSelector.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\WeaponUI.cs" />
     <Compile Include="Assets\tankio\WebglCall\JsWebglAPI.cs" />
     <Compile Include="Assets\tankio\WebglCall\TestCall.cs" />
   </ItemGroup>
