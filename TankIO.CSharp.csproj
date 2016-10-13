@@ -76,20 +76,20 @@
     <Reference Include="GUIAnimator">
       <HintPath>Assets\GUI Animator\GUI Animator for Unity UI\Plugins\GUIAnimator.dll</HintPath>
     </Reference>
-    <Reference Include="SampleClassLibrary">
-      <HintPath>Assets\SurfUnityBattelService\JsonDotNet\Examples\Tests\TestModels\SampleClassLibrary.dll</HintPath>
+    <Reference Include="Common">
+      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Editor">
+      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Editor.dll</HintPath>
     </Reference>
     <Reference Include="Security">
       <HintPath>Assets\Plugins\UnityPurchasing\Bin\Security.dll</HintPath>
     </Reference>
-    <Reference Include="Apple">
-      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Apple\Apple.dll</HintPath>
-    </Reference>
-    <Reference Include="Common">
-      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Common.dll</HintPath>
-    </Reference>
     <Reference Include="Stores">
       <HintPath>Assets\Plugins\UnityPurchasing\Bin\Stores.dll</HintPath>
+    </Reference>
+    <Reference Include="Apple">
+      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Apple\Apple.dll</HintPath>
     </Reference>
     <Reference Include="Tizen">
       <HintPath>Assets\Plugins\UnityPurchasing\Bin\Tizen\Tizen.dll</HintPath>
@@ -97,8 +97,8 @@
     <Reference Include="winrt">
       <HintPath>Assets\Plugins\UnityPurchasing\winrt\winrt.dll</HintPath>
     </Reference>
-    <Reference Include="Editor">
-      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Editor.dll</HintPath>
+    <Reference Include="SampleClassLibrary">
+      <HintPath>Assets\SurfUnityBattelService\JsonDotNet\Examples\Tests\TestModels\SampleClassLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1015,6 +1015,7 @@
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\MonoPInvokeCallbackAttribute.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\RewardBasedVideoAdClient.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\Utils.cs" />
+    <Compile Include="Assets\SurfUnityBattelService\BackgroubdChecker.cs" />
     <Compile Include="Assets\SurfUnityBattelService\CommRemoteObject.cs" />
     <Compile Include="Assets\SurfUnityBattelService\CommRemoteRepo.cs" />
     <Compile Include="Assets\SurfUnityBattelService\Dto\AllSyncData.cs" />
@@ -1565,6 +1566,24 @@
     <Compile Include="Assets\tankio\Script\FpsMoveFeedback.cs" />
     <Compile Include="Assets\tankio\Script\GameManager.cs" />
     <Compile Include="Assets\tankio\Script\GameStatus.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\CommTeamTargetObject.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\PlayerTeam.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\PlayerTeamCenter.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\TeamTankDto.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\TeamTarget.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\TwoTeamManager.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\TwoTeamsPlaceBroner.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\WinLoseDialog.cs" />
+    <Compile Include="Assets\tankio\Script\IOTwoTeans\WinloseLevelComplater.cs" />
+    <Compile Include="Assets\tankio\Script\Index\BackSelectButton.cs" />
+    <Compile Include="Assets\tankio\Script\Index\CommingSoonButton.cs" />
+    <Compile Include="Assets\tankio\Script\Index\GoIoScenButton.cs" />
+    <Compile Include="Assets\tankio\Script\Index\HomePager.cs" />
+    <Compile Include="Assets\tankio\Script\Index\IndexManager.cs" />
+    <Compile Include="Assets\tankio\Script\Index\LevelGroup.cs" />
+    <Compile Include="Assets\tankio\Script\Index\LevelTile.cs" />
+    <Compile Include="Assets\tankio\Script\Index\MissionPager.cs" />
+    <Compile Include="Assets\tankio\Script\Index\TorchLight.cs" />
     <Compile Include="Assets\tankio\Script\Item\CommRemoteItem.cs" />
     <Compile Include="Assets\tankio\Script\Item\ItemInitDto.cs" />
     <Compile Include="Assets\tankio\Script\Item\ItemSyncManager.cs" />
@@ -1584,9 +1603,9 @@
     <Compile Include="Assets\tankio\Script\Mobile\JoystickTabset.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\MobileButton.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\MobileClickShootInputer.cs" />
+    <Compile Include="Assets\tankio\Script\Mobile\MobileIniter.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\MobileInputer.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\MobileManager.cs" />
-    <Compile Include="Assets\tankio\Script\Mobile\MobileModeLoader.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\MobileRestartButton.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\MobileStartMenu.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\ModeTab.cs" />
@@ -1619,6 +1638,7 @@
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Record1UpgradeRecord.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Record2UpgradeRecord.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Record3UpgradeRecord.cs" />
+    <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Record4UpgradeRecord.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\TankRecord1.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Upgrade.cs" />
     <Compile Include="Assets\tankio\Script\Record\AttrTypeF.cs" />
@@ -1634,15 +1654,20 @@
     <Compile Include="Assets\tankio\Script\SettingIAP\CoinBuyer.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\I18nButton.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\I18nChooser.cs" />
+    <Compile Include="Assets\tankio\Script\SettingIAP\IAPProductF.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\PageTab.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\PageTabset.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\Purchaser.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\SettingSoundButton.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\SettingsIAPManager.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\CalcTouchdown.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\LevelComplate.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\LevelCompleter.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\LevelTarget.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\MissionLevelDB.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\MissionManager.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\ScoreCalc.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\ScoreRankF.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\TankSwitcher.cs" />
     <Compile Include="Assets\tankio\Script\Tank\IntoInvincibleTask.cs" />
     <Compile Include="Assets\tankio\Script\Tank\LocalTank.cs" />
@@ -1654,6 +1679,7 @@
     <Compile Include="Assets\tankio\Script\Tank\ModelSetuper.cs" />
     <Compile Include="Assets\tankio\Script\Tank\MoveBundle.cs" />
     <Compile Include="Assets\tankio\Script\Tank\PaintingDB.cs" />
+    <Compile Include="Assets\tankio\Script\Tank\PlaceBorner.cs" />
     <Compile Include="Assets\tankio\Script\Tank\PlayerGouster.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RandomPlaceBorner.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RemoteTank.cs" />
@@ -1661,14 +1687,22 @@
     <Compile Include="Assets\tankio\Script\Tool\FPSCounter.cs" />
     <Compile Include="Assets\tankio\Script\Tool\GlobalMethod.cs" />
     <Compile Include="Assets\tankio\Script\Tool\I18nText.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\IntentPageF.cs" />
     <Compile Include="Assets\tankio\Script\Tool\IntentUtils.cs" />
     <Compile Include="Assets\tankio\Script\Tool\LanguageIniter.cs" />
     <Compile Include="Assets\tankio\Script\Tool\LanguageSource.cs" />
     <Compile Include="Assets\tankio\Script\Tool\LuckyDrawer.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\ModeLoader.cs" />
     <Compile Include="Assets\tankio\Script\Tool\MoveCenter.cs" />
     <Compile Include="Assets\tankio\Script\Tool\SoundVolumInject.cs" />
     <Compile Include="Assets\tankio\Script\Tool\SurfMErrorDto.cs" />
     <Compile Include="Assets\tankio\Script\Tool\Toast.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UAUtils.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\Gallery.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\GalleryFlipEvent.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\SiftRunInterruper.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\TestPager.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\ViewPager.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Tab.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Tabset.cs" />
     <Compile Include="Assets\tankio\Script\Tool\URestApi.cs" />
