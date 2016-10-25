@@ -1050,6 +1050,7 @@
     <Compile Include="Assets\SurfUnityBattelService\Dto\NtpDto.cs" />
     <Compile Include="Assets\SurfUnityBattelService\Dto\RemoteBroadcastData.cs" />
     <Compile Include="Assets\SurfUnityBattelService\Dto\RemoteData.cs" />
+    <Compile Include="Assets\SurfUnityBattelService\Dto\RoomInfo.cs" />
     <Compile Include="Assets\SurfUnityBattelService\Dto\SyncTimeDto.cs" />
     <Compile Include="Assets\SurfUnityBattelService\Dto\SysInboxDto.cs" />
     <Compile Include="Assets\SurfUnityBattelService\ErrorBundle.cs" />
@@ -1266,6 +1267,7 @@
     <Compile Include="Assets\tankio\Script\GameStatus.cs" />
     <Compile Include="Assets\tankio\Script\Index\BackSelectButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\CommingSoonButton.cs" />
+    <Compile Include="Assets\tankio\Script\Index\DialogBlurBGer.cs" />
     <Compile Include="Assets\tankio\Script\Index\GoIoScenButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\HomePager.cs" />
     <Compile Include="Assets\tankio\Script\Index\IndexManager.cs" />
@@ -1273,6 +1275,11 @@
     <Compile Include="Assets\tankio\Script\Index\LevelTile.cs" />
     <Compile Include="Assets\tankio\Script\Index\MissionPager.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVPPager.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVPRoomAdapter.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVPRoomCreator.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVPRoomLister.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVPRoomRow.cs" />
+    <Compile Include="Assets\tankio\Script\Index\RFServerStorer.cs" />
     <Compile Include="Assets\tankio\Script\Index\TankModelInto.cs" />
     <Compile Include="Assets\tankio\Script\Index\TorchLight.cs" />
     <Compile Include="Assets\tankio\Script\Item\CommRemoteItem.cs" />
@@ -1403,10 +1410,9 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\CommTeamTargetObject.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\FakePlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\FakePlayersHandler.cs" />
-    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomCreator.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomData.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomManager.cs" />
-    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\RFServerStorer.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\QueryFilter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TwoTeamMapDB.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeamCenter.cs" />
@@ -1422,6 +1428,7 @@
     <Compile Include="Assets\tankio\Script\Ui\Dialog\AlertDialog.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Dialog\DailyRewardDialog.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Dialog\DailyRewardItem.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Dialog\DialogShowListenerSet.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Dialog\YesNoDialog.cs" />
     <Compile Include="Assets\tankio\Script\Ui\DialogManager.cs" />
     <Compile Include="Assets\tankio\Script\Ui\ExitButton.cs" />
