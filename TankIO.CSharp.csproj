@@ -79,26 +79,26 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Security">
-      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Apple">
-      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Apple\Apple.dll</HintPath>
-    </Reference>
     <Reference Include="Common">
       <HintPath>Assets\Plugins\UnityPurchasing\Bin\Common.dll</HintPath>
     </Reference>
+    <Reference Include="Editor">
+      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Security">
+      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Security.dll</HintPath>
+    </Reference>
     <Reference Include="Stores">
       <HintPath>Assets\Plugins\UnityPurchasing\Bin\Stores.dll</HintPath>
+    </Reference>
+    <Reference Include="Apple">
+      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Apple\Apple.dll</HintPath>
     </Reference>
     <Reference Include="Tizen">
       <HintPath>Assets\Plugins\UnityPurchasing\Bin\Tizen\Tizen.dll</HintPath>
     </Reference>
     <Reference Include="winrt">
       <HintPath>Assets\Plugins\UnityPurchasing\winrt\winrt.dll</HintPath>
-    </Reference>
-    <Reference Include="Editor">
-      <HintPath>Assets\Plugins\UnityPurchasing\Bin\Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1135,6 +1135,7 @@
     <Compile Include="Assets\TDSTK\Scripts\Props\TextureScroll.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Props\UnitPartRotate.cs" />
     <Compile Include="Assets\TDSTK\Scripts\ShootObject.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\EffectLimiter.cs" />
     <Compile Include="Assets\TDSTK\Scripts\TDSArea.cs" />
     <Compile Include="Assets\TDSTK\Scripts\TDSPath_WIP.cs" />
     <Compile Include="Assets\TDSTK\Scripts\TouchInput\TDSJoystick.cs" />
@@ -1178,8 +1179,6 @@
     <Compile Include="Assets\TDSTK\Scripts\UnitSpawner.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Weapon.cs" />
     <Compile Include="Assets\TDSTK\Scripts\WeaponHandler.cs" />
-    <Compile Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\BlurOptimized.cs" />
-    <Compile Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\PostEffectsBase.cs" />
     <Compile Include="Assets\tankio\Animation\HelloText.cs" />
     <Compile Include="Assets\tankio\Animation\UiAnimFixer.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\Animation\_Common\scripts\Timer.cs" />
@@ -1274,11 +1273,14 @@
     <Compile Include="Assets\tankio\Script\Index\LevelGroup.cs" />
     <Compile Include="Assets\tankio\Script\Index\LevelTile.cs" />
     <Compile Include="Assets\tankio\Script\Index\MissionPager.cs" />
-    <Compile Include="Assets\tankio\Script\Index\PVPPager.cs" />
-    <Compile Include="Assets\tankio\Script\Index\PVPRoomAdapter.cs" />
-    <Compile Include="Assets\tankio\Script\Index\PVPRoomCreator.cs" />
-    <Compile Include="Assets\tankio\Script\Index\PVPRoomLister.cs" />
-    <Compile Include="Assets\tankio\Script\Index\PVPRoomRow.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\LevelRangeDropdown.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\MapDropdown.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\PVPPager.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomAdapter.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomCreator.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomDialog.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomLister.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomRow.cs" />
     <Compile Include="Assets\tankio\Script\Index\RFServerStorer.cs" />
     <Compile Include="Assets\tankio\Script\Index\TankModelInto.cs" />
     <Compile Include="Assets\tankio\Script\Index\TorchLight.cs" />
@@ -1412,7 +1414,10 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\FakePlayersHandler.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomData.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomManager.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPStartDialog.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\QueryFilter.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TeamMemberList.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TeamMemberRow.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TwoTeamMapDB.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeamCenter.cs" />
@@ -1475,8 +1480,55 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrection3DLut.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionEffect.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Adaptation.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\GrayscaleEffect.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\MotionBlurClear.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrain.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrainDX11.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SepiaToneEffect.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SimpleClear.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\TwirlEffect.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\VortexEffect.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA2.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA3Console.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableBlur.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
     <None Include="Assets\TDSTK\Model\BlendColorsOverlayTexture.shader" />
-    <None Include="Assets\TDSTK\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
     <None Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
     <None Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
     <None Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
