@@ -1208,7 +1208,6 @@
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\ColorCorrectionCurves.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\DepthOfField.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\EdgeDetection.cs" />
-    <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\GlobalFog.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBaseFX.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\ScreenSpaceAmbientOcclusion.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\Tonemapping.cs" />
@@ -1281,6 +1280,7 @@
     <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomDialog.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomLister.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomRow.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\QueryButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\RFServerStorer.cs" />
     <Compile Include="Assets\tankio\Script\Index\TankModelInto.cs" />
     <Compile Include="Assets\tankio\Script\Index\TorchLight.cs" />
@@ -1383,7 +1383,9 @@
     <Compile Include="Assets\tankio\Script\Tank\PlayerGouster.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RandomPlaceBorner.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RemoteTank.cs" />
+    <Compile Include="Assets\tankio\Script\TempI18n.cs" />
     <Compile Include="Assets\tankio\Script\Tool\AppVersionChecker.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\CanvasCameraInject.cs" />
     <Compile Include="Assets\tankio\Script\Tool\CheatDefer.cs" />
     <Compile Include="Assets\tankio\Script\Tool\FPSCounter.cs" />
     <Compile Include="Assets\tankio\Script\Tool\GlobalMethod.cs" />
@@ -1421,10 +1423,12 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TwoTeamMapDB.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeamCenter.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\SoulViewer.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TeamTankDto.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TeamTarget.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TwoTeamManager.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TwoTeamsPlaceBroner.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\WaitRevivalCounter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\WinLoseDialog.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\WinloseLevelComplater.cs" />
     <Compile Include="Assets\tankio\Script\Ui\BuyPaintButton.cs" />
@@ -1434,9 +1438,10 @@
     <Compile Include="Assets\tankio\Script\Ui\Dialog\DailyRewardDialog.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Dialog\DailyRewardItem.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Dialog\DialogShowListenerSet.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\Dialog\InputDialog.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Dialog\YesNoDialog.cs" />
     <Compile Include="Assets\tankio\Script\Ui\DialogManager.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\ExitButton.cs" />
+    <Compile Include="Assets\tankio\Script\Ui\ExitHandler.cs" />
     <Compile Include="Assets\tankio\Script\Ui\FakePlayerOverlay.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Hud\AttrLister.cs" />
     <Compile Include="Assets\tankio\Script\Ui\Hud\LevelExpMonitor.cs" />
@@ -1480,6 +1485,10 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\API.txt" />
+    <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />
+    <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Integration\readme.txt" />
+    <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Shaders\WallHackTexture.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
