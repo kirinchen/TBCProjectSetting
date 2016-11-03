@@ -16,7 +16,7 @@
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
-    <UnityVersion>5.4.1f1</UnityVersion>
+    <UnityVersion>5.4.2f2</UnityVersion>
     <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
@@ -27,7 +27,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;UNITY_64;UNITY_PURCHASING;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_2;UNITY_5_4;UNITY_5;UNITY_64;UNITY_PURCHASING;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -37,7 +37,7 @@
     <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_1;UNITY_5_4;UNITY_5;UNITY_64;UNITY_PURCHASING;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_2;UNITY_5_4;UNITY_5;UNITY_64;UNITY_PURCHASING;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;CROSS_PLATFORM_INPUT</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -1213,6 +1213,8 @@
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Effects\ImageEffects\Scripts\Tonemapping.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\_assets\Unity\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
     <Compile Include="Assets\tankio\Particle\Tazo_fx\Script\BillBoard.cs" />
+    <Compile Include="Assets\tankio\Resources\TwoTeamMap\Defender_Dust\IO2TeamSetting.cs" />
+    <Compile Include="Assets\tankio\Resources\TwoTeamMap\Defender_Dust\PVPSetting.cs" />
     <Compile Include="Assets\tankio\Script\Account\AccountButton.cs" />
     <Compile Include="Assets\tankio\Script\Account\AccountManager.cs" />
     <Compile Include="Assets\tankio\Script\Account\Botcoder.cs" />
@@ -1260,6 +1262,9 @@
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrPluser.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\PlusAttrDto.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\TBCAttr.cs" />
+    <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponAttrCalcProvider.cs" />
+    <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponAttrCalcer.cs" />
+    <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponInitDB.cs" />
     <Compile Include="Assets\tankio\Script\FpsMoveFeedback.cs" />
     <Compile Include="Assets\tankio\Script\GameManager.cs" />
     <Compile Include="Assets\tankio\Script\GameStatus.cs" />
@@ -1269,9 +1274,7 @@
     <Compile Include="Assets\tankio\Script\Index\GoIoScenButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\HomePager.cs" />
     <Compile Include="Assets\tankio\Script\Index\IndexManager.cs" />
-    <Compile Include="Assets\tankio\Script\Index\LevelGroup.cs" />
-    <Compile Include="Assets\tankio\Script\Index\LevelTile.cs" />
-    <Compile Include="Assets\tankio\Script\Index\MissionPager.cs" />
+    <Compile Include="Assets\tankio\Script\Index\PVP\CreatbleCutdown.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\LevelRangeDropdown.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\MapDropdown.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\PVPPager.cs" />
@@ -1282,6 +1285,10 @@
     <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomRow.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\QueryButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\RFServerStorer.cs" />
+    <Compile Include="Assets\tankio\Script\Index\SingleMission\LevelGroup.cs" />
+    <Compile Include="Assets\tankio\Script\Index\SingleMission\LevelTile.cs" />
+    <Compile Include="Assets\tankio\Script\Index\SingleMission\MissionFlipButton.cs" />
+    <Compile Include="Assets\tankio\Script\Index\SingleMission\MissionPager.cs" />
     <Compile Include="Assets\tankio\Script\Index\TankModelInto.cs" />
     <Compile Include="Assets\tankio\Script\Index\TorchLight.cs" />
     <Compile Include="Assets\tankio\Script\Item\CommRemoteItem.cs" />
@@ -1332,6 +1339,41 @@
     <Compile Include="Assets\tankio\Script\Npc\FakePlayerSpawer.cs" />
     <Compile Include="Assets\tankio\Script\Npc\PortableAiSpaw.cs" />
     <Compile Include="Assets\tankio\Script\Npc\PosTargetDto.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\BuyPaintButton.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\BuyWeaponButton.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\CreateBackButton.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\AlertDialog.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\DailyRewardDialog.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\DailyRewardItem.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\DialogShowListenerSet.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\InputDialog.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\YesNoDialog.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\DialogManager.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\ExitHandler.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\FakePlayerOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AttrLister.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\LevelExpMonitor.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\SafetyExitAlert.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\ScoreUI.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\WeaponUI.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Leaderboard.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\LoadingText.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\LocalPlayerOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\NameInputFilter.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\PlayerModelShower.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\PlayerOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\PlayerUiOverlayManager.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\ReAttrButton.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\ReTankNamer.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\ReloadButton.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\RemotePlayerOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\StartMenu.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\TankCreator.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\TankSelector.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\TankWRer.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\TurnOnOffButton.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\VersionUI.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\WeaponSelector.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\AttrTypeF1.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Record1.cs" />
     <Compile Include="Assets\tankio\Script\Record\ArchiveSchema\Record1UpgradeRecord.cs" />
@@ -1431,41 +1473,6 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\WaitRevivalCounter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\WinLoseDialog.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\WinloseLevelComplater.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\BuyPaintButton.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\BuyWeaponButton.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\CreateBackButton.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Dialog\AlertDialog.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Dialog\DailyRewardDialog.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Dialog\DailyRewardItem.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Dialog\DialogShowListenerSet.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Dialog\InputDialog.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Dialog\YesNoDialog.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\DialogManager.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\ExitHandler.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\FakePlayerOverlay.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Hud\AttrLister.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Hud\LevelExpMonitor.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Hud\SafetyExitAlert.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Hud\ScoreUI.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Hud\WeaponUI.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\Leaderboard.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\LoadingText.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\LocalPlayerOverlay.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\NameInputFilter.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\PlayerModelShower.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\PlayerOverlay.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\PlayerUiOverlayManager.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\ReAttrButton.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\ReTankNamer.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\ReloadButton.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\RemotePlayerOverlay.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\StartMenu.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\TankCreator.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\TankSelector.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\TankWRer.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\TurnOnOffButton.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\VersionUI.cs" />
-    <Compile Include="Assets\tankio\Script\Ui\WeaponSelector.cs" />
     <Compile Include="Assets\tankio\WebglCall\JsWebglAPI.cs" />
     <Compile Include="Assets\tankio\WebglCall\TestCall.cs" />
     <Compile Include="Assets\unity-adapter-listview\listview\ExampleAdapter.cs" />
