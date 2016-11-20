@@ -215,7 +215,9 @@
     <Compile Include="Assets\TDSTK\Scripts\Editor\_MenuExtension.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Editor\_SupportNContactWindow.cs" />
     <Compile Include="Assets\TDSTK\Scripts\Editor\_TDSEditor.cs" />
+    <Compile Include="Assets\tankio\Script\Editor\LanguageSourceEditor.cs" />
     <Compile Include="Assets\tankio\Script\Editor\PaintingDBEditor.cs" />
+    <Compile Include="Assets\tankio\Script\Editor\SortListEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Best HTTP (Pro)\ReleaseNotes.txt" />
