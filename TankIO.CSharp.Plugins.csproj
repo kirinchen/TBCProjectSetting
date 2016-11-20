@@ -181,6 +181,9 @@
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Integration\readme.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Shaders\WallHackTexture.shader" />
+    <None Include="Assets\Rotorz\Reorderable List Field\!LICENSE.txt" />
+    <None Include="Assets\Rotorz\Reorderable List Field\!README.txt" />
+    <None Include="Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
