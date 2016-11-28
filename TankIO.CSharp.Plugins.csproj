@@ -176,6 +176,10 @@
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Readme.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Editor\Note.txt" />
     <None Include="Assets\GUI Animator\GUI Animator for Unity UI\Scripts\Note.txt" />
+    <None Include="Assets\Holo UI for UGUI\Changelog.txt" />
+    <None Include="Assets\Holo UI for UGUI\Readme.txt" />
+    <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Changelog.txt" />
+    <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\readme.txt" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\API.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />
