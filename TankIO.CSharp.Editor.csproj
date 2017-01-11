@@ -283,6 +283,7 @@
     <None Include="Assets\Holo UI for UGUI\Readme.txt" />
     <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Changelog.txt" />
     <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\readme.txt" />
+    <None Include="Assets\Mech_Constructor_LtMed\Readme.txt" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\API.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />
