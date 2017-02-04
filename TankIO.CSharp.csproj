@@ -108,6 +108,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\100 Best Effect Pack\Script\csAnimationPlay.cs" />
+    <Compile Include="Assets\100 Best Effect Pack\Script\csLightIntancityControl.cs" />
+    <Compile Include="Assets\100 Best Effect Pack\Script\csPrefebMake.cs" />
+    <Compile Include="Assets\100 Best Effect Pack\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
+    <Compile Include="Assets\100 Best Effect Pack\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Authentication\Credentials.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Authentication\Digest.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Authentication\DigestStore.cs" />
@@ -1169,6 +1174,7 @@
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\AOEAbilityHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\AllAbilityHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\AmplifyDamageSpaw.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\CustomAbility\BanMagicSpaw.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\BulletStorm.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\BulletStormBundle.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\FireSpeedMulSpaw.cs" />
@@ -1182,6 +1188,8 @@
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\SelfAbilityHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\ShieldUp.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\ShootAbilityHandler.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\CustomAbility\Turrent.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\CustomAbility\TurretRotationSyncListener.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAiHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\AttackedFireSpeedUpShootImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\BaseCollisionShootImpl.cs" />
@@ -1307,12 +1315,21 @@
     <Compile Include="Assets\tankio\Script\Ability\AOEStunLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AbilityLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AllAbilityLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\BanMagicFog.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\BomberLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\BomberLocalHandler.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\BomberRemoteHandler.cs" />
     <Compile Include="Assets\tankio\Script\Ability\BoostingLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\BulletStormLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\BurningMPLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\CDZeroLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\ContinuousBeamLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\DamageDeepensFogLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\DestroyAllLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\FieldRepairLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\FireSpeedUpLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\FlashJumpLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\FlyHammerLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\GuardianShieldLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\HPRepairPerSecHandler.cs" />
     <Compile Include="Assets\tankio\Script\Ability\HPRepairPerSecLevel.cs" />
@@ -1320,6 +1337,7 @@
     <Compile Include="Assets\tankio\Script\Ability\SelfAbilityLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\ShieldUpLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\ShootAbilityLevel.cs" />
+    <Compile Include="Assets\tankio\Script\Ability\TheArtOfWarLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\WeaponAbilityLevelDB.cs" />
     <Compile Include="Assets\tankio\Script\Account\AccountButton.cs" />
     <Compile Include="Assets\tankio\Script\Account\AccountManager.cs" />
@@ -1343,7 +1361,9 @@
     <Compile Include="Assets\tankio\Script\Ad\UnityAds.cs" />
     <Compile Include="Assets\tankio\Script\Ad\UnityAdser.cs" />
     <Compile Include="Assets\tankio\Script\BuffAndConnect.cs" />
+    <Compile Include="Assets\tankio\Script\BuffAndConnectSingleton.cs" />
     <Compile Include="Assets\tankio\Script\Constant.cs" />
+    <Compile Include="Assets\tankio\Script\Dto\BomberDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\EffectDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\FireWeaponDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\HpUpdateDto.cs" />
@@ -1360,6 +1380,7 @@
     <Compile Include="Assets\tankio\Script\Dto\TagF.cs" />
     <Compile Include="Assets\tankio\Script\Dto\TankDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\TellSyncPosToRemoteTankDto.cs" />
+    <Compile Include="Assets\tankio\Script\Dto\TurretRotationDto.cs" />
     <Compile Include="Assets\tankio\Script\Effect\EffectPrefabsList.cs" />
     <Compile Include="Assets\tankio\Script\Effect\EffectShower.cs" />
     <Compile Include="Assets\tankio\Script\Evolution\WeaponEvoDB.cs" />
@@ -1419,7 +1440,6 @@
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponBehaviours\WeaponBehaviourDB.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponInitDB.cs" />
     <Compile Include="Assets\tankio\Script\FpsMoveFeedback.cs" />
-    <Compile Include="Assets\tankio\Script\GM.cs" />
     <Compile Include="Assets\tankio\Script\GameManager.cs" />
     <Compile Include="Assets\tankio\Script\GameStatus.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\AbilityAllGrids.cs" />
@@ -1472,6 +1492,7 @@
     <Compile Include="Assets\tankio\Script\Index\PVP\PVPRoomRow.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\QueryButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\PointTile.cs" />
+    <Compile Include="Assets\tankio\Script\Index\QuickIntoButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\RFServerStorer.cs" />
     <Compile Include="Assets\tankio\Script\Index\SingleMission\LevelGroup.cs" />
     <Compile Include="Assets\tankio\Script\Index\SingleMission\LevelTile.cs" />
@@ -1595,6 +1616,8 @@
     <Compile Include="Assets\tankio\Script\Record\ResourceLimiter.cs" />
     <Compile Include="Assets\tankio\Script\Record\ScoreCoinResulter.cs" />
     <Compile Include="Assets\tankio\Script\RemoteObjectCreater.cs" />
+    <Compile Include="Assets\tankio\Script\Room\GameKindF.cs" />
+    <Compile Include="Assets\tankio\Script\Room\RoomBundle.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\BuyCoinLister.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\CoinBuyer.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\I18nButton.cs" />
@@ -1659,6 +1682,7 @@
     <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\TestPager.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Gallery\ViewPager.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\ListDialog.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\UI\Loading.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Tab.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Tabset.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UI\Toast.cs" />
