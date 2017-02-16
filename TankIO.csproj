@@ -1196,7 +1196,6 @@
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\ShootAbilityHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\Turrent.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomAbility\TurretRotationSyncListener.cs" />
-    <Compile Include="Assets\TDSTK\Scripts\CustomAiHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\AttackedFireSpeedUpShootImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\BaseCollisionShootImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\CollisionShootImpl.cs" />
@@ -1244,6 +1243,12 @@
     <Compile Include="Assets\TDSTK\Scripts\ShootObjects\PointShoot.cs" />
     <Compile Include="Assets\TDSTK\Scripts\ShootObjects\SimpleShoot.cs" />
     <Compile Include="Assets\TDSTK\Scripts\SurfMEx\EffectLimiter.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\MobAI\AggressiveAiHandler.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\MobAI\AggressiveTriggerAiHandler.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\MobAI\CustomAiHandler.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\MobAI\NavMoveHandler.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\MobAI\ScanMoveHandler.cs" />
+    <Compile Include="Assets\TDSTK\Scripts\SurfMEx\MobAI\StandGuardAiHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\TDSArea.cs" />
     <Compile Include="Assets\TDSTK\Scripts\TDSPath_WIP.cs" />
     <Compile Include="Assets\TDSTK\Scripts\TouchInput\TDSJoystick.cs" />
@@ -1315,8 +1320,8 @@
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\_Common\scripts\_static\MathUtility.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\_Common\scripts\misc\RandomObject.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\_Common\scripts\misc\UpdateCallback.cs" />
-    <Compile Include="Assets\tankio\Resources\TwoTeamMap\Defender_Dust\IO2TeamSetting.cs" />
-    <Compile Include="Assets\tankio\Resources\TwoTeamMap\Defender_Dust\PVPSetting.cs" />
+    <Compile Include="Assets\tankio\Resources\Maps\Defender_Dust\IO2TeamSetting.cs" />
+    <Compile Include="Assets\tankio\Resources\Maps\Defender_Dust\PVPSetting.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AOEAbilityLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AOEHPRepaireLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AOEStunLevel.cs" />
@@ -1526,6 +1531,7 @@
     <Compile Include="Assets\tankio\Script\KillSystem\KillBroadcast.cs" />
     <Compile Include="Assets\tankio\Script\KillSystem\KillExpHandler.cs" />
     <Compile Include="Assets\tankio\Script\KillSystem\KillNumShower.cs" />
+    <Compile Include="Assets\tankio\Script\MapDB.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\AdRewardButton.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\ExpRewarder.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\FailFireDetecter.cs" />
@@ -1553,6 +1559,9 @@
     <Compile Include="Assets\tankio\Script\Mode\GameMode.cs" />
     <Compile Include="Assets\tankio\Script\Mode\GameModeLoadHandler.cs" />
     <Compile Include="Assets\tankio\Script\Mode\ModeConfigs.cs" />
+    <Compile Include="Assets\tankio\Script\Npc\2Team\MobsSpawnPoint.cs" />
+    <Compile Include="Assets\tankio\Script\Npc\2Team\TeamAiHandler.cs" />
+    <Compile Include="Assets\tankio\Script\Npc\2Team\TeamCommRemoteAi.cs" />
     <Compile Include="Assets\tankio\Script\Npc\AiDamgeDto.cs" />
     <Compile Include="Assets\tankio\Script\Npc\AiFakePlayer.cs" />
     <Compile Include="Assets\tankio\Script\Npc\AiFireDto.cs" />
@@ -1634,6 +1643,7 @@
     <Compile Include="Assets\tankio\Script\Record\ScoreCoinResulter.cs" />
     <Compile Include="Assets\tankio\Script\RemoteObjectCreater.cs" />
     <Compile Include="Assets\tankio\Script\Room\GameKindF.cs" />
+    <Compile Include="Assets\tankio\Script\Room\MapDebugObjects.cs" />
     <Compile Include="Assets\tankio\Script\Room\RoomBundle.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\BuyCoinLister.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\CoinBuyer.cs" />
@@ -1718,7 +1728,6 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\QueryFilter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TeamMemberList.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TeamMemberRow.cs" />
-    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TwoTeamMapDB.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeamCenter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\RemotePlayerTeam.cs" />
