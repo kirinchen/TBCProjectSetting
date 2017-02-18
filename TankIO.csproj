@@ -1410,6 +1410,7 @@
     <Compile Include="Assets\tankio\Script\Evolution\WeaponEvoNode.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrLevelTable.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrPlusButton.cs" />
+    <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrPlusPlayTimeImpl.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrPluser.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\PlusAttrDto.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\TBCAttr.cs" />
@@ -1475,6 +1476,7 @@
     <Compile Include="Assets\tankio\Script\Index\Ability\GotAbilityChipButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\MountAbilityButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\MountAbilityEditor.cs" />
+    <Compile Include="Assets\tankio\Script\Index\AttrPlusIndexImpl.cs" />
     <Compile Include="Assets\tankio\Script\Index\BackSelectButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\BagItemAdapter.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\BagPager.cs" />
@@ -1516,6 +1518,7 @@
     <Compile Include="Assets\tankio\Script\Index\PointTile.cs" />
     <Compile Include="Assets\tankio\Script\Index\QuickIntoButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\RFServerStorer.cs" />
+    <Compile Include="Assets\tankio\Script\Index\SetupAttrDialog.cs" />
     <Compile Include="Assets\tankio\Script\Index\SingleMission\LevelGroup.cs" />
     <Compile Include="Assets\tankio\Script\Index\SingleMission\LevelTile.cs" />
     <Compile Include="Assets\tankio\Script\Index\SingleMission\MissionFilper.cs" />
@@ -1726,6 +1729,7 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPStartDialog.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPWinLoseBroadcastData.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\QueryFilter.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TD\TowerSituation.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TeamMemberList.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TeamMemberRow.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PlayerTeam.cs" />
