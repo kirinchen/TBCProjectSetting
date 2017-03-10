@@ -1104,6 +1104,7 @@
     <Compile Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Scripts\SPInstance.cs" />
     <Compile Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Scripts\SPSpriteInfo.cs" />
     <Compile Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Scripts\UITexturePacker.cs" />
+    <Compile Include="Assets\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
     <Compile Include="Assets\Rocks and Boulders 2\Shaders\RotateGameObject.cs" />
     <Compile Include="Assets\Rocks and Boulders 2\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Rocks and Boulders 2\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
@@ -1426,6 +1427,7 @@
     <Compile Include="Assets\tankio\Script\BuffAndConnectSingleton.cs" />
     <Compile Include="Assets\tankio\Script\Constant.cs" />
     <Compile Include="Assets\tankio\Script\Dto\BomberDto.cs" />
+    <Compile Include="Assets\tankio\Script\Dto\ChatMsgDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\EffectDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\FireWeaponDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\HpUpdateDto.cs" />
@@ -1516,16 +1518,11 @@
     <Compile Include="Assets\tankio\Script\Index\Ability\AbilityPager.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\AbilityUpgradeButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\AllAbilityTile.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Ability\GotAbilityChipButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\MountAbilityButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Ability\MountAbilityEditor.cs" />
     <Compile Include="Assets\tankio\Script\Index\AttrPlusIndexImpl.cs" />
     <Compile Include="Assets\tankio\Script\Index\BackSelectButton.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Bag\BagItemAdapter.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Bag\BagPager.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\ConsumableList.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Bag\DesignDrawsExBtnInit.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Bag\ItemRow.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\MiningBasicTab.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\MiningButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\MiningDialog.cs" />
@@ -1533,8 +1530,6 @@
     <Compile Include="Assets\tankio\Script\Index\Bag\MiningTab.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\OreChooseAdapter.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\OreChooseRow.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Bag\OreExBtnInit.cs" />
-    <Compile Include="Assets\tankio\Script\Index\Bag\RowExButtons.cs" />
     <Compile Include="Assets\tankio\Script\Index\Bag\UpgradeDialog.cs" />
     <Compile Include="Assets\tankio\Script\Index\CommingSoonButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\DialogBlurBGer.cs" />
@@ -1548,6 +1543,8 @@
     <Compile Include="Assets\tankio\Script\Index\HomePager.cs" />
     <Compile Include="Assets\tankio\Script\Index\IndexManager.cs" />
     <Compile Include="Assets\tankio\Script\Index\IndexPage.cs" />
+    <Compile Include="Assets\tankio\Script\Index\OreInfoList.cs" />
+    <Compile Include="Assets\tankio\Script\Index\OreTile.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\CreatbleCutdown.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\LevelRangeDropdown.cs" />
     <Compile Include="Assets\tankio\Script\Index\PVP\MapDropdown.cs" />
@@ -1647,9 +1644,11 @@
     <Compile Include="Assets\tankio\Script\PlayGameUi\EnergyBar.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\ExitHandler.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\FakePlayerOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\HpBar.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AbilityList.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AbilityTile.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AttrLister.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\ChatView.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\LevelExpMonitor.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\SafetyExitAlert.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\ScoreUI.cs" />
@@ -1721,6 +1720,7 @@
     <Compile Include="Assets\tankio\Script\SingleMission\MissionManager.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\MissionUICanvas.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\ScoreCalc.cs" />
+    <Compile Include="Assets\tankio\Script\SingleMission\ScoreCalcBasic.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\ScoreRankF.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\TankSwitcher.cs" />
     <Compile Include="Assets\tankio\Script\Tank\IntoInvincibleTask.cs" />
@@ -1821,6 +1821,11 @@
     <None Include="Assets\Holo UI for UGUI\Readme.txt" />
     <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Changelog.txt" />
     <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\readme.txt" />
+    <None Include="Assets\Lava_Flowing_Shader\ReadMe.txt" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Diffuse_Lava_Distort.shader" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort_Transparent.shader" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
     <None Include="Assets\Mech_Constructor_LtMed\Materials\PBR_Maps\Source_PSD_Link_LtMed.txt" />
     <None Include="Assets\Mech_Constructor_LtMed\Readme.txt" />
     <None Include="Assets\Mech_Constructor_Spiders\Materials\Flat_PBR\Source_PSD_Link.txt" />
@@ -1920,6 +1925,7 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\TDSTK\Model\BlendColorsOverlayTexture.shader" />
     <None Include="Assets\Unity-Ztest-Apha\ZTestApha.shader" />
+    <None Include="Assets\tankio\Model\Simple Apocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Model\SimpleMilitary\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Resources\Maps\Defender_Dust\Materials\Blend SM2.shader" />
   </ItemGroup>

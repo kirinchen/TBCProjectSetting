@@ -194,6 +194,11 @@
     <None Include="Assets\Holo UI for UGUI\Readme.txt" />
     <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\Changelog.txt" />
     <None Include="Assets\Holo UI for UGUI\Simple Sprite Packer\readme.txt" />
+    <None Include="Assets\Lava_Flowing_Shader\ReadMe.txt" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Diffuse_Lava_Distort.shader" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort_Transparent.shader" />
+    <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
     <None Include="Assets\Mech_Constructor_LtMed\Materials\PBR_Maps\Source_PSD_Link_LtMed.txt" />
     <None Include="Assets\Mech_Constructor_LtMed\Readme.txt" />
     <None Include="Assets\Mech_Constructor_Spiders\Materials\Flat_PBR\Source_PSD_Link.txt" />
@@ -293,6 +298,7 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\TDSTK\Model\BlendColorsOverlayTexture.shader" />
     <None Include="Assets\Unity-Ztest-Apha\ZTestApha.shader" />
+    <None Include="Assets\tankio\Model\Simple Apocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Model\SimpleMilitary\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Resources\Maps\Defender_Dust\Materials\Blend SM2.shader" />
   </ItemGroup>
