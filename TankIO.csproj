@@ -1246,7 +1246,6 @@
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\EnhancedFreezingShootImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\FireballShootImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\GuardianShieldShootImpl.cs" />
-    <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\HookChainShootImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\ShootHandler.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\SpearCannonImpl.cs" />
     <Compile Include="Assets\TDSTK\Scripts\CustomShootObject\SpeedLaserShootImpl.cs" />
@@ -1432,6 +1431,7 @@
     <Compile Include="Assets\tankio\Script\Dto\FireWeaponDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\HpUpdateDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\LaunchAbilityDto.cs" />
+    <Compile Include="Assets\tankio\Script\Dto\LeaveCmdDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\ModelChangeDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\MoveDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\PlayerKilledDto.cs" />
@@ -1497,6 +1497,7 @@
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeapinAttrCalacer\Snipe\CalcerStrengthentheheavysnipe.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeapinAttrCalacer\Snipe\Calcerheavysnipe.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeapinAttrCalacer\Snipe\Calcerlightsnipe.cs" />
+    <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeapinAttrCalacer\Snipe\HookChainShootImpl.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeapinAttrCalacer\WeaponAttrCalcer.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponAttrCalcProvider.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeaponBehaviours\ComboAttackSpeed.cs" />
@@ -1648,6 +1649,7 @@
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AbilityList.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AbilityTile.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AttrLister.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AttrTile.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\ChatView.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\LevelExpMonitor.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\SafetyExitAlert.cs" />
@@ -1734,12 +1736,14 @@
     <Compile Include="Assets\tankio\Script\Tank\PaintingDB.cs" />
     <Compile Include="Assets\tankio\Script\Tank\PlaceBorner.cs" />
     <Compile Include="Assets\tankio\Script\Tank\PlayerGouster.cs" />
+    <Compile Include="Assets\tankio\Script\Tank\PlayerTrail.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RandomPlaceBorner.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RemoteTank.cs" />
     <Compile Include="Assets\tankio\Script\Tank\TankAnimHandler.cs" />
     <Compile Include="Assets\tankio\Script\Tank\TankFireAnimHandler.cs" />
     <Compile Include="Assets\tankio\Script\Tank\TankMoveAnimHandler.cs" />
     <Compile Include="Assets\tankio\Script\Tank\TrailColorSetuper.cs" />
+    <Compile Include="Assets\tankio\Script\Tank\TrailManager.cs" />
     <Compile Include="Assets\tankio\Script\TempI18n.cs" />
     <Compile Include="Assets\tankio\Script\Tool\AppVersionChecker.cs" />
     <Compile Include="Assets\tankio\Script\Tool\CanvasCameraInject.cs" />
