@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -1143,6 +1146,7 @@
     <Compile Include="Assets\Rocks and Boulders 2\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\Rocks and Boulders 2\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Rocks and Boulders 2\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <Compile Include="Assets\Scripts\Steamworks.NET\SteamManager.cs" />
     <Compile Include="Assets\SpellCraft Assets\Demo\Scripts\SC_ClickButton.cs" />
     <Compile Include="Assets\SpellCraft Assets\Demo\Scripts\SC_EffectsModeDemo.cs" />
     <Compile Include="Assets\SpellCraft Assets\Demo\Scripts\SC_ToggleButton.cs" />
@@ -1362,8 +1366,7 @@
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\_Common\scripts\_static\MathUtility.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\_Common\scripts\misc\RandomObject.cs" />
     <Compile Include="Assets\tankio\Particle\Mirza Beig\Mirza Beig\_Common\scripts\misc\UpdateCallback.cs" />
-    <Compile Include="Assets\tankio\Resources\Maps\Defender_Dust\IO2TeamSetting.cs" />
-    <Compile Include="Assets\tankio\Resources\Maps\Defender_Dust\PVPSetting.cs" />
+    <Compile Include="Assets\tankio\Resources\Maps\dark_jungle\PVPSetting.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AOEAbilityLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AOEHPRepaireLevel.cs" />
     <Compile Include="Assets\tankio\Script\Ability\AOEStunLevel.cs" />
@@ -1425,6 +1428,7 @@
     <Compile Include="Assets\tankio\Script\BuffAndConnect.cs" />
     <Compile Include="Assets\tankio\Script\BuffAndConnectSingleton.cs" />
     <Compile Include="Assets\tankio\Script\Constant.cs" />
+    <Compile Include="Assets\tankio\Script\Dto\ApplyAttckDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\BomberDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\ChatMsgDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\EffectDto.cs" />
@@ -1761,6 +1765,7 @@
     <Compile Include="Assets\tankio\Script\Tool\MoveCenter.cs" />
     <Compile Include="Assets\tankio\Script\Tool\PlayMethod.cs" />
     <Compile Include="Assets\tankio\Script\Tool\SoundVolumInject.cs" />
+    <Compile Include="Assets\tankio\Script\Tool\SteamIniter.cs" />
     <Compile Include="Assets\tankio\Script\Tool\TankCursorHandler.cs" />
     <Compile Include="Assets\tankio\Script\Tool\TestNav.cs" />
     <Compile Include="Assets\tankio\Script\Tool\UAUtils.cs" />
@@ -1841,6 +1846,7 @@
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Integration\readme.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Shaders\WallHackTexture.shader" />
+    <None Include="Assets\Plugins\Steamworks.NET\redist\steam_appid.txt" />
     <None Include="Assets\Rocks and Boulders 2\Shaders\Blend SM2.shader" />
     <None Include="Assets\Rocks and Boulders 2\Shaders\Blend SM3.shader" />
     <None Include="Assets\Rocks and Boulders 2\Shaders\shader info.txt" />
@@ -1929,9 +1935,12 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
     <None Include="Assets\TDSTK\Model\BlendColorsOverlayTexture.shader" />
     <None Include="Assets\Unity-Ztest-Apha\ZTestApha.shader" />
+    <None Include="Assets\tankio\Model\OfficalTank2\Shaders\HalfLambert.shader" />
+    <None Include="Assets\tankio\Model\OfficalTank2\Shaders\OutlineAndShadow.shader" />
+    <None Include="Assets\tankio\Model\OfficalTank2\Shaders\VlitWithShadows.shader" />
     <None Include="Assets\tankio\Model\Simple Apocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Model\SimpleMilitary\Materials\UnlitVertexColour_Alpha.shader" />
-    <None Include="Assets\tankio\Resources\Maps\Defender_Dust\Materials\Blend SM2.shader" />
+    <None Include="Assets\tankio\Resources\Maps\dark_jungle\Materials\Blend SM2.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
