@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -1421,6 +1418,8 @@
     <Compile Include="Assets\tankio\Script\Account\TestRest.cs" />
     <Compile Include="Assets\tankio\Script\Account\UserDataCenter.cs" />
     <Compile Include="Assets\tankio\Script\Account\XGunService.cs" />
+    <Compile Include="Assets\tankio\Script\Account\XGunServiceHandleBase.cs" />
+    <Compile Include="Assets\tankio\Script\Account\XGunServiceHandleSteam.cs" />
     <Compile Include="Assets\tankio\Script\Ad\Admober.cs" />
     <Compile Include="Assets\tankio\Script\Ad\HelloAdCounter.cs" />
     <Compile Include="Assets\tankio\Script\Ad\UnityAds.cs" />
@@ -1715,6 +1714,7 @@
     <Compile Include="Assets\tankio\Script\SettingIAP\PageTab.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\PageTabset.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\Purchaser.cs" />
+    <Compile Include="Assets\tankio\Script\SettingIAP\ResolutionSetuper.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\SettingSoundButton.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\SettingsIAPManager.cs" />
     <Compile Include="Assets\tankio\Script\SingleMission\BackButton.cs" />
@@ -1856,6 +1856,8 @@
     <None Include="Assets\Rotorz\Reorderable List Field\!LICENSE.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\!README.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
+    <None Include="Assets\SimpleApocalypse\ReadMe.txt" />
+    <None Include="Assets\SimpleApocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
@@ -1938,7 +1940,6 @@
     <None Include="Assets\tankio\Model\OfficalTank2\Shaders\HalfLambert.shader" />
     <None Include="Assets\tankio\Model\OfficalTank2\Shaders\OutlineAndShadow.shader" />
     <None Include="Assets\tankio\Model\OfficalTank2\Shaders\VlitWithShadows.shader" />
-    <None Include="Assets\tankio\Model\Simple Apocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Model\SimpleMilitary\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Resources\Maps\dark_jungle\Materials\Blend SM2.shader" />
   </ItemGroup>

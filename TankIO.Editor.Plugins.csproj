@@ -55,9 +55,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -248,6 +245,8 @@
     <None Include="Assets\Rotorz\Reorderable List Field\!LICENSE.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\!README.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
+    <None Include="Assets\SimpleApocalypse\ReadMe.txt" />
+    <None Include="Assets\SimpleApocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
@@ -330,7 +329,6 @@
     <None Include="Assets\tankio\Model\OfficalTank2\Shaders\HalfLambert.shader" />
     <None Include="Assets\tankio\Model\OfficalTank2\Shaders\OutlineAndShadow.shader" />
     <None Include="Assets\tankio\Model\OfficalTank2\Shaders\VlitWithShadows.shader" />
-    <None Include="Assets\tankio\Model\Simple Apocalypse\_Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Model\SimpleMilitary\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\tankio\Resources\Maps\dark_jungle\Materials\Blend SM2.shader" />
   </ItemGroup>
