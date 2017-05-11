@@ -249,12 +249,12 @@ namespace CodeStage.AntiCheat.Detectors
 			Debug.LogWarning(FINAL_LOG_PREFIX + "works in debug mode. There WILL BE false positives in editor, it's fine!", this);
 #endif
 #endif
-			if ((callback != null) && detectionEventHasListener)
+			if ((callback != null || callbackWithArgument != null) && detectionEventHasListener)
 			{
 				Debug.LogWarning(FINAL_LOG_PREFIX + "has properly configured Detection Event in the inspector, but still get started with Action callback. Both Action and Detection Event will be called on detection. Are you sure you wish to do this?", this);
 			}
 
-			if (callback == null && !detectionEventHasListener)
+			if ((callback == null && callbackWithArgument == null) && !detectionEventHasListener)
 			{
 				Debug.LogWarning(FINAL_LOG_PREFIX + "was started without any callbacks. Please configure Detection Event in the inspector, or pass the callback Action to the StartDetection method.", this);
 				enabled = false;

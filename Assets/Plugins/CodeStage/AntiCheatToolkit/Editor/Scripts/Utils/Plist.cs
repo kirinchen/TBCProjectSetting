@@ -1,4 +1,5 @@
-﻿//
+﻿#if UNITY_EDITOR
+//
 //   PlistCS Property List (plist) serialization and parsing library.
 //
 //   https://github.com/animetrics/PlistCS
@@ -959,3 +960,4 @@ namespace CodeStage.AntiCheat.EditorCode
 		}
 	}
 }
+#endif

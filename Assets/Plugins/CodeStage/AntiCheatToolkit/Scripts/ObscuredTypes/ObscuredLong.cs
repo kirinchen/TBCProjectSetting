@@ -25,16 +25,23 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		private long hiddenValue;
 
 		[SerializeField]
+		private bool inited;
+
+		[SerializeField]
 		private long fakeValue;
 
 		[SerializeField]
-		private bool inited;
+		private bool fakeValueActive;
 
 		private ObscuredLong(long value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
-			fakeValue = 0;
+			hiddenValue = Encrypt(value);
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : 0;
+			fakeValueActive = detectorRunning;
+
 			inited = true;
 		}
 
@@ -112,7 +119,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			long decrypted = InternalDecrypt();
 
-			currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			do
+			{
+				currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			} while (currentCryptoKey == 0);
 			hiddenValue = Encrypt(decrypted, currentCryptoKey);
 		}
 
@@ -141,7 +151,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public long GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private long InternalDecrypt()
@@ -151,12 +176,15 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 				currentCryptoKey = cryptoKey;
 				hiddenValue = Encrypt(0);
 				fakeValue = 0;
+				fakeValueActive = false;
 				inited = true;
+
+				return 0;
 			}
 
 			long decrypted = Decrypt(hiddenValue, currentCryptoKey);
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValue != 0 && decrypted != fakeValue)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && decrypted != fakeValue)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -168,12 +196,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		//! @cond
 		public static implicit operator ObscuredLong(long value)
 		{
-			ObscuredLong obscured = new ObscuredLong(Encrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return new ObscuredLong(value);
 		}
 
 		public static implicit operator long(ObscuredLong value)
@@ -189,7 +212,13 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
 			}
+			else
+			{
+				input.fakeValueActive = false;
+			}
+
 			return input;
 		}
 
@@ -201,7 +230,13 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
 			}
+			else
+			{
+				input.fakeValueActive = false;
+			}
+
 			return input;
 		}
 

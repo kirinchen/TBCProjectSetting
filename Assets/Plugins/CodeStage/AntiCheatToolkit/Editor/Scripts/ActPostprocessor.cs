@@ -1,4 +1,5 @@
-﻿#define ACTK_DEBUG
+﻿#if UNITY_EDITOR
+#define ACTK_DEBUG
 #undef ACTK_DEBUG
 
 #define ACTK_DEBUG_VERBOSE
@@ -13,21 +14,28 @@ using System.Linq;
 using System.Reflection;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEditor;
+#if UNITY_2017_1_OR_NEWER
+using UnityEditor.Build;
+#endif
 using UnityEditor.Callbacks;
 using Debug = UnityEngine.Debug;
 
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 using System.Diagnostics;
 #endif
 
 namespace CodeStage.AntiCheat.EditorCode
 {
-	internal class ActPostprocessor:AssetPostprocessor
+#if UNITY_2017_1_OR_NEWER
+	internal class ActPostprocessor : AssetPostprocessor, IActiveBuildTargetChanged
+#else
+	internal class ActPostprocessor : AssetPostprocessor
+#endif
 	{
 		private static readonly List<AllowedAssembly> allowedAssemblies = new List<AllowedAssembly>();
 		private static readonly List<string> allLibraries = new List<string>();
 
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 		[UnityEditor.MenuItem("Anti-Cheat Toolkit/Force Injection Detector data collection")]
 		private static void CallInjectionScan()
 		{
@@ -51,7 +59,7 @@ namespace CodeStage.AntiCheat.EditorCode
 				{
 					if (deletedAsset.IndexOf(ActEditorGlobalStuff.INJECTION_DATA_FILE) > -1 && !EditorApplication.isCompiling)
 					{
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 						Debug.LogWarning("Looks like Injection Detector data file was accidentally removed! Re-creating...\nIf you wish to remove " + ActEditorGlobalStuff.INJECTION_DATA_FILE + " file, just disable Injection Detecotr in the ACTk Settings window.");
 #endif
 						InjectionAssembliesScan();
@@ -64,17 +72,14 @@ namespace CodeStage.AntiCheat.EditorCode
 		[DidReloadScripts]
 		private static void ScriptsWereReloaded()
 		{
+#if !UNITY_2017_1_OR_NEWER
 			EditorUserBuildSettings.activeBuildTargetChanged += OnBuildTargetChanged;
+#endif
 
 			if (EditorPrefs.GetBool(ActEditorGlobalStuff.PREFS_INJECTION_ENABLED))
 			{
 				InjectionAssembliesScan();
 			}
-		}
-
-		private static void OnBuildTargetChanged()
-		{
-			InjectionDetectorTargetCompatibleCheck();
 		}
 
 		internal static void InjectionAssembliesScan()
@@ -90,9 +95,9 @@ namespace CodeStage.AntiCheat.EditorCode
 				return;
 			}
 
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			Stopwatch sw = Stopwatch.StartNew();
-	#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Injection Detector Assemblies Scan\n");
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Paths:\n" +
@@ -101,10 +106,10 @@ namespace CodeStage.AntiCheat.EditorCode
 			          "Assemblies: " + ActEditorGlobalStuff.ASSEMBLIES_PATH + "\n" +
 			          "Injection Detector Data: " + ActEditorGlobalStuff.INJECTION_DATA_PATH);
 			sw.Start();
-	#endif
+#endif
 #endif
 
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Looking for all assemblies in current project...");
 			sw.Start();
@@ -114,7 +119,7 @@ namespace CodeStage.AntiCheat.EditorCode
 
 			allLibraries.AddRange(ActEditorGlobalStuff.FindLibrariesAt(ActEditorGlobalStuff.assetsPath));
 			allLibraries.AddRange(ActEditorGlobalStuff.FindLibrariesAt(ActEditorGlobalStuff.assembliesPath));
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Total libraries found: " + allLibraries.Count);
 			sw.Start();
@@ -124,7 +129,7 @@ namespace CodeStage.AntiCheat.EditorCode
 			foreach (string libraryPath in allLibraries)
 			{
 				string libraryPathLowerCase = libraryPath.ToLower();
-#if (DEBUG_PARANIOD)
+#if (ACTK_DEBUG_PARANIOD)
 				sw.Stop();
 				Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Checking library at the path: " + libraryPathLowerCase);
 				sw.Start();
@@ -156,7 +161,7 @@ namespace CodeStage.AntiCheat.EditorCode
 				}
 			}
 
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			string trace = ActEditorGlobalStuff.LOG_PREFIX + "Found assemblies (" + allowedAssemblies.Count + "):\n";
 
@@ -171,7 +176,7 @@ namespace CodeStage.AntiCheat.EditorCode
 #endif
 			if (!Directory.Exists(ActEditorGlobalStuff.resourcesPath))
 			{
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 				sw.Stop();
 				Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Creating resources folder: " + ActEditorGlobalStuff.RESOURCES_PATH);
 				sw.Start();
@@ -185,7 +190,7 @@ namespace CodeStage.AntiCheat.EditorCode
 
 			int totalWhitelistedAssemblies;
 
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Processing default whitelist");
 			sw.Start();
@@ -208,7 +213,7 @@ namespace CodeStage.AntiCheat.EditorCode
 			}
 			else
 			{
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 				sw.Stop();
 #endif
 				bw.Close();
@@ -216,7 +221,7 @@ namespace CodeStage.AntiCheat.EditorCode
 				return;
 			}
 
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Processing user whitelist");
 			sw.Start();
@@ -238,7 +243,7 @@ namespace CodeStage.AntiCheat.EditorCode
 				br.Close();
 			}
 
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Processing project assemblies");
 			sw.Start();
@@ -260,15 +265,15 @@ namespace CodeStage.AntiCheat.EditorCode
 				}
 
 				string line = ObscuredString.EncryptDecrypt(name + ActEditorGlobalStuff.INJECTION_DATA_SEPARATOR + hashes, "Elina");
-				
-#if (DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+
+#if (ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 				Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Writing assembly:\n" + name + ActEditorGlobalStuff.INJECTION_DATA_SEPARATOR + hashes);
 #endif
 				bw.Write(line);
 			}
 
-			bw.Close();			 
-#if (DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
+			bw.Close();
+#if (ACTK_DEBUG || ACTK_DEBUG_VERBOSE || ACTK_DEBUG_PARANIOD)
 			sw.Stop();
 			Debug.Log(ActEditorGlobalStuff.LOG_PREFIX + "Assemblies scan duration: " + sw.ElapsedMilliseconds + " ms.");
 #endif
@@ -300,5 +305,20 @@ namespace CodeStage.AntiCheat.EditorCode
 				ActEditorGlobalStuff.CleanInjectionDetectorData();
 			}
 		}
-    }
+
+#if UNITY_2017_1_OR_NEWER
+		public int callbackOrder { get { return 0; } }
+		public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
+		{
+			InjectionDetectorTargetCompatibleCheck();
+		}
+#else
+		private static void OnBuildTargetChanged()
+		{
+			InjectionDetectorTargetCompatibleCheck();
+		}
+#endif
+
+	}
 }
+#endif

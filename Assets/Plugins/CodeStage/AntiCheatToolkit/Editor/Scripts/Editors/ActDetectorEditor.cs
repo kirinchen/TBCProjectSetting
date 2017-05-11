@@ -1,4 +1,5 @@
-﻿using CodeStage.AntiCheat.Detectors;
+﻿#if UNITY_EDITOR
+using CodeStage.AntiCheat.Detectors;
 using UnityEditor;
 using UnityEngine;
 
@@ -74,3 +75,4 @@ namespace CodeStage.AntiCheat.EditorCode.Editors
 		protected virtual void DrawAdditionalEvents() {}
 	}
 }
+#endif

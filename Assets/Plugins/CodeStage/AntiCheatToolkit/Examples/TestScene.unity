@@ -121,13 +121,15 @@ MonoBehaviour:
   obscuredString:
     currentCryptoKey: 4441
     hiddenValue: 7d001300590011005b00560047005200410046005100550014004700400043005d005a005300
-    fakeValue: I'm obscured string
     inited: 1
+    fakeValue: I'm obscured string
+    fakeValueActive: 0
   obscuredInt:
     currentCryptoKey: 444444
     hiddenValue: 446431
-    fakeValue: 1987
     inited: 1
+    fakeValue: 1987
+    fakeValueActive: 0
   obscuredFloat:
     currentCryptoKey: 230887
     hiddenValue:
@@ -136,26 +138,28 @@ MonoBehaviour:
       b3: 248
       b4: 68
     hiddenValueOld: 4a24f844
-    fakeValue: 2013.05237
     inited: 1
+    fakeValue: 2013.05237
+    fakeValueActive: 0
   obscuredVector3:
     currentCryptoKey: 120207
     hiddenValue:
       x: 1093260687
       y: 1094309263
       z: 1095357839
-    fakeValue: {x: 10.5, y: 11.5, z: 12.5}
     inited: 1
+    fakeValue: {x: 10.5, y: 11.5, z: 12.5}
+    fakeValueActive: 0
   obscuredBool:
     currentCryptoKey: 215
     hiddenValue: 2
-    fakeValue: 1
-    fakeValueChanged: 1
     inited: 1
+    fakeValue: 1
+    fakeValueActive: 1
   obscuredLong:
     inited: 1
+    fakeValueActive: 0
   obscuredDouble:
-    hiddenValueOld: 1bfcda5ce0e92240
     hiddenValue:
       b1: 27
       b2: 252
@@ -165,15 +169,18 @@ MonoBehaviour:
       b6: 233
       b7: 34
       b8: 64
-    fakeValue: 9.4567898765400003
+    hiddenValueOld: 1bfcda5ce0e92240
     inited: 1
+    fakeValue: 9.4567898765400003
+    fakeValueActive: 0
   obscuredVector2:
     currentCryptoKey: 120206
     hiddenValue:
       x: 1091163534
       y: 1092212110
-    fakeValue: {x: 8.5, y: 9.5}
     inited: 1
+    fakeValue: {x: 8.5, y: 9.5}
+    fakeValueActive: 0
   prefsEncryptionKey: Hidden in inspector! \o/
 --- !u!1 &407560386
 GameObject:
@@ -186,6 +193,7 @@ GameObject:
   - 114: {fileID: 407560390}
   - 114: {fileID: 407560389}
   - 114: {fileID: 407560388}
+  - 114: {fileID: 407560392}
   - 114: {fileID: 407560387}
   m_Layer: 0
   m_Name: Anti-Cheat Toolkit Detectors
@@ -211,17 +219,29 @@ MonoBehaviour:
   autoDispose: 1
   detectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 390067136}
+        m_MethodName: OnWallHackDetected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  detectionEventHasListener: 0
+  detectionEventHasListener: 1
   checkRigidbody: 1
   checkController: 1
   checkWireframe: 1
   checkRaycast: 1
   wireframeDelay: 10
   raycastDelay: 10
-  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnPosition: {x: 1000, y: 1000, z: 1000}
   maxFalsePositives: 3
 --- !u!114 &407560388
 MonoBehaviour:
@@ -240,10 +260,22 @@ MonoBehaviour:
   autoDispose: 1
   detectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 390067136}
+        m_MethodName: OnSpeedHackDetected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  detectionEventHasListener: 0
+  detectionEventHasListener: 1
   interval: 1
   maxFalsePositives: 3
   coolDown: 30
@@ -297,10 +329,22 @@ MonoBehaviour:
   autoDispose: 1
   detectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 390067136}
+        m_MethodName: OnObscuredTypeCheatingDetected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  detectionEventHasListener: 0
+  detectionEventHasListener: 1
   floatEpsilon: 9.99999975e-05
   vector2Epsilon: .100000001
   vector3Epsilon: .100000001
@@ -317,6 +361,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &407560392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63,
+    type: 2}
+  m_PrefabInternal: {fileID: 1218160009}
+  m_GameObject: {fileID: 407560386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb994d96ecfe4d4697d649e0e7d5100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoStart: 1
+  keepAlive: 1
+  autoDispose: 1
+  detectionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 390067136}
+        m_MethodName: OnTimeCheatingDetected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  detectionEventHasListener: 1
+  interval: 1
+  threshold: 65
 --- !u!1 &589551972
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +621,23 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
       propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -578,6 +673,54 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 390067136}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnWallHackDetected
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEventHasListener
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 390067136}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSpeedHackDetected
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEventHasListener
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
       propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -599,6 +742,66 @@ Prefab:
       value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEventHasListener
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 390067136}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnObscuredTypeCheatingDetected
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEventHasListener
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: spawnPosition.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: spawnPosition.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: spawnPosition.z
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 390067136}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTimeCheatingDetected
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
+      propertyPath: detectionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 60b6c172f7c2a1f4abacc848f7547d63, type: 2}
       propertyPath: detectionEventHasListener
       value: 1
       objectReference: {fileID: 0}

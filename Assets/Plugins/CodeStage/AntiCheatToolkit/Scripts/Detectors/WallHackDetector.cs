@@ -1,13 +1,13 @@
-﻿#if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+﻿#define UNITY_5_6_PLUS
+#if UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5
+#undef UNITY_5_6_PLUS
+#endif
+
+#if (UNITY_EDITOR || DEVELOPMENT_BUILD)
 #define ACTK_UNITY_DEBUG_ENABLED
 #if ACTK_WALLHACK_DEBUG
 #define WALLHACK_DEBUG
 #endif
-#endif
-
-#define UNITY_5_4_PLUS
-#if UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
-#undef UNITY_5_4_PLUS
 #endif
 
 using System.Collections;
@@ -21,7 +21,7 @@ using UnityEngine.Rendering;
 #endif
 
 
-#if UNITY_5_4_PLUS
+#if UNITY_5_4_OR_NEWER
 using UnityEngine.SceneManagement;
 #endif
 
@@ -368,7 +368,7 @@ namespace CodeStage.AntiCheat.Detectors
 				Instance = this;
 			}
 
-#if UNITY_5_4_PLUS
+#if UNITY_5_4_OR_NEWER
 			SceneManager.sceneLoaded += OnLevelWasLoadedNew;
 #endif
 		}
@@ -399,7 +399,7 @@ namespace CodeStage.AntiCheat.Detectors
 			instancesInScene--;
 		}
 
-#if UNITY_5_4_PLUS
+#if UNITY_5_4_OR_NEWER
 		private void OnLevelWasLoadedNew(Scene scene, LoadSceneMode mode)
 		{
 			OnLevelLoadedCallback();
@@ -710,7 +710,11 @@ namespace CodeStage.AntiCheat.Detectors
 							if (renderTexture == null)
 							{
 								renderTexture = new RenderTexture(RENDER_TEXTURE_SIZE, RENDER_TEXTURE_SIZE, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
+#if UNITY_5_5_OR_NEWER
 								renderTexture.autoGenerateMips = false;
+#else
+								renderTexture.generateMips = false;
+#endif
 								renderTexture.filterMode = FilterMode.Point;
 								renderTexture.Create();
 							}
@@ -768,25 +772,27 @@ namespace CodeStage.AntiCheat.Detectors
 								backgroundRenderer.enabled = false;
 							}
 
-							if (wfCamera == null)
-							{
-								wfCamera = new GameObject("WireframeCamera").AddComponent<Camera>();
-								wfCamera.gameObject.layer = whLayer;
-								wfCamera.transform.parent = serviceContainer.transform;
-								wfCamera.transform.localPosition = new Vector3(0, 0, -1f);
-								wfCamera.clearFlags = CameraClearFlags.SolidColor;
-								wfCamera.backgroundColor = Color.black;
-								wfCamera.orthographic = true;
-								wfCamera.orthographicSize = 0.5f;
-								wfCamera.nearClipPlane = 0.01f;
-								wfCamera.farClipPlane = 2.1f;
-								wfCamera.depth = 0;
-								wfCamera.renderingPath = RenderingPath.Forward;
-								wfCamera.useOcclusionCulling = false;
-								wfCamera.hdr = false;
-								wfCamera.targetTexture = renderTexture;
-								wfCamera.enabled = false;
-							}
+							wfCamera = new GameObject("WireframeCamera").AddComponent<Camera>();
+							wfCamera.gameObject.layer = whLayer;
+							wfCamera.transform.parent = serviceContainer.transform;
+							wfCamera.transform.localPosition = new Vector3(0, 0, -1f);
+							wfCamera.clearFlags = CameraClearFlags.SolidColor;
+							wfCamera.backgroundColor = Color.black;
+							wfCamera.orthographic = true;
+							wfCamera.orthographicSize = 0.5f;
+							wfCamera.nearClipPlane = 0.01f;
+							wfCamera.farClipPlane = 2.1f;
+							wfCamera.depth = 0;
+							wfCamera.renderingPath = RenderingPath.Forward;
+							wfCamera.useOcclusionCulling = false;
+#if UNITY_5_6_OR_NEWER || UNITY_5_6_PLUS
+							wfCamera.allowHDR = false;
+							wfCamera.allowMSAA = false;
+#else
+							wfCamera.hdr = false;
+#endif
+							wfCamera.targetTexture = renderTexture;
+							wfCamera.enabled = false;
 						}
 					}
 				}
@@ -800,7 +806,7 @@ namespace CodeStage.AntiCheat.Detectors
 				}
 #endregion
 
-				#region raycast
+#region raycast
 				if (checkRaycast && thinWall == null)
 				{
 					thinWall = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -823,7 +829,7 @@ namespace CodeStage.AntiCheat.Detectors
 				{
 					Destroy(thinWall);
 				}
-				#endregion
+#endregion
 			}
 			else if (serviceContainer != null)
 			{
@@ -981,7 +987,7 @@ namespace CodeStage.AntiCheat.Detectors
 #endif
 
 			// in case we've deactivated detector while waiting for a frame
-			if (wfCamera == null) yield return null;
+			if (wfCamera == null) yield break;
 
 			wfCamera.enabled = false;
 

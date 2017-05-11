@@ -25,26 +25,33 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		private long currentCryptoKey;
 
 		[SerializeField]
+		private ACTkByte8 hiddenValue;
+
+		[SerializeField]
 		[FormerlySerializedAs("hiddenValue")]
 #pragma warning disable 414
 		private byte[] hiddenValueOld;
 #pragma warning restore 414
 
 		[SerializeField]
-		private ACTkByte8 hiddenValue;
+		private bool inited;
 
 		[SerializeField]
 		private double fakeValue;
 
 		[SerializeField]
-		private bool inited;
+		private bool fakeValueActive;
 
-		private ObscuredDouble(ACTkByte8 value)
+		private ObscuredDouble(double value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
+			hiddenValue = InternalEncrypt(value);
 			hiddenValueOld = null;
-			fakeValue = 0;
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : 0;
+			fakeValueActive = detectorRunning;
+
 			inited = true;
 		}
 
@@ -136,7 +143,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			double decrypted = InternalDecrypt();
 
-			currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			do
+			{
+				currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			} while (currentCryptoKey == 0);
+
 			hiddenValue = InternalEncrypt(decrypted, currentCryptoKey);
 		}
 
@@ -171,7 +182,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public double GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private double InternalDecrypt()
@@ -181,7 +207,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 				currentCryptoKey = cryptoKey;
 				hiddenValue = InternalEncrypt(0);
 				fakeValue = 0;
+				fakeValueActive = false;
 				inited = true;
+
+				return 0;
 			}
 
 			var union = new DoubleLongBytesUnion();
@@ -191,7 +220,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 			double decrypted = union.d;
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValue != 0 && Math.Abs(decrypted - fakeValue) > 0.000001d)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && Math.Abs(decrypted - fakeValue) > 0.000001d)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -199,29 +228,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			return decrypted;
 		}
 
-		[StructLayout(LayoutKind.Explicit)]
-		private struct DoubleLongBytesUnion
-		{
-			[FieldOffset(0)]
-			public double d;
-
-			[FieldOffset(0)]
-			public long l;
-
-			[FieldOffset(0)]
-			public ACTkByte8 b8;
-		}
-
 		#region operators, overrides, interface implementations
 		//! @cond
 		public static implicit operator ObscuredDouble(double value)
 		{
-			ObscuredDouble obscured = new ObscuredDouble(InternalEncrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return new ObscuredDouble(value);
 		}
 
 		public static implicit operator double(ObscuredDouble value)
@@ -237,6 +248,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
+			}
+			else
+			{
+				input.fakeValueActive = false;
 			}
 
 			return input;
@@ -250,7 +266,13 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
 			}
+			else
+			{
+				input.fakeValueActive = false;
+			}
+
 			return input;
 		}
 
@@ -347,5 +369,18 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		}
 		//! @endcond
 		#endregion
+
+		[StructLayout(LayoutKind.Explicit)]
+		private struct DoubleLongBytesUnion
+		{
+			[FieldOffset(0)]
+			public double d;
+
+			[FieldOffset(0)]
+			public long l;
+
+			[FieldOffset(0)]
+			public ACTkByte8 b8;
+		}
 	}
 }

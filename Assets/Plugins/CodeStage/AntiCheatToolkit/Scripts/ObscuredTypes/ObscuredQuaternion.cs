@@ -13,7 +13,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 	public struct ObscuredQuaternion
 	{
 		private static int cryptoKey = 120205;
-		private static readonly Quaternion initialFakeValue = Quaternion.identity;
+		private static readonly Quaternion identity = Quaternion.identity;
 
 #if UNITY_EDITOR
 		// For internal Editor usage only (may be useful for drawers).
@@ -26,16 +26,52 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		private RawEncryptedQuaternion hiddenValue;
 
 		[SerializeField]
+		private bool inited;
+
+		[SerializeField]
 		private Quaternion fakeValue;
 
 		[SerializeField]
-		private bool inited;
+		private bool fakeValueActive;
 
-		private ObscuredQuaternion(RawEncryptedQuaternion value)
+		private ObscuredQuaternion(Quaternion value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
-			fakeValue = initialFakeValue;
+			hiddenValue = Encrypt(value);
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : identity;
+			fakeValueActive = detectorRunning;
+
+			inited = true;
+		}
+
+		/// <summary>
+		/// Mimics constructor of regular Quaternion. Please note, passed components are not Euler Angles.
+		/// </summary>
+		/// <param name="x">X component of the quaternion</param>
+		/// <param name="y">Y component of the quaternion</param>
+		/// <param name="z">Z component of the quaternion</param>
+		/// <param name="w">W component of the quaternion</param>
+		public ObscuredQuaternion(float x, float y, float z, float w)
+		{
+			currentCryptoKey = cryptoKey;
+			hiddenValue = Encrypt(x, y, z, w, currentCryptoKey);
+
+			if (Detectors.ObscuredCheatingDetector.IsRunning)
+			{
+				fakeValue.x = x;
+				fakeValue.y = y;
+				fakeValue.z = z;
+				fakeValue.w = w;
+				fakeValueActive = true;
+			}
+			else
+			{
+				fakeValue = identity;
+				fakeValueActive = false;
+			}
+			
 			inited = true;
 		}
 
@@ -61,16 +97,25 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		/// </summary>
 		public static RawEncryptedQuaternion Encrypt(Quaternion value, int key)
 		{
+			return Encrypt(value.x, value.y, value.z, value.w, key);
+		}
+
+		/// <summary>
+		/// Use this simple encryption method to encrypt Quaternion components, uses passed crypto key.
+		/// Please note, passed components are not an Euler Angles.
+		/// </summary>
+		public static RawEncryptedQuaternion Encrypt(float x, float y, float z, float w, int key)
+		{
 			if (key == 0)
 			{
 				key = cryptoKey;
 			}
 
 			RawEncryptedQuaternion result;
-			result.x = ObscuredFloat.Encrypt(value.x, key);
-			result.y = ObscuredFloat.Encrypt(value.y, key);
-			result.z = ObscuredFloat.Encrypt(value.z, key);
-			result.w = ObscuredFloat.Encrypt(value.w, key);
+			result.x = ObscuredFloat.Encrypt(x, key);
+			result.y = ObscuredFloat.Encrypt(y, key);
+			result.z = ObscuredFloat.Encrypt(z, key);
+			result.w = ObscuredFloat.Encrypt(w, key);
 
 			return result;
 		}
@@ -123,7 +168,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			Quaternion decrypted = InternalDecrypt();
 
-			currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			do
+			{
+				currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			} while (currentCryptoKey == 0);
 			hiddenValue = Encrypt(decrypted, currentCryptoKey);
 		}
 
@@ -150,7 +198,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public Quaternion GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private Quaternion InternalDecrypt()
@@ -158,9 +221,12 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (!inited)
 			{
 				currentCryptoKey = cryptoKey;
-				hiddenValue = Encrypt(initialFakeValue);
-				fakeValue = initialFakeValue;
+				hiddenValue = Encrypt(identity);
+				fakeValue = identity;
+				fakeValueActive = false;
 				inited = true;
+
+				return identity;
 			}
 
 			Quaternion value;
@@ -170,7 +236,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			value.z = ObscuredFloat.Decrypt(hiddenValue.z, currentCryptoKey);
 			value.w = ObscuredFloat.Decrypt(hiddenValue.w, currentCryptoKey);
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && !fakeValue.Equals(initialFakeValue) && !CompareQuaternionsWithTolerance(value, fakeValue))
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && !CompareQuaternionsWithTolerance(value, fakeValue))
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -191,12 +257,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		//! @cond
 		public static implicit operator ObscuredQuaternion(Quaternion value)
 		{
-			ObscuredQuaternion obscured = new ObscuredQuaternion(Encrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return new ObscuredQuaternion(value);
 		}
 
 		public static implicit operator Quaternion(ObscuredQuaternion value)
@@ -234,7 +295,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		}
 
 		//! @endcond
-#endregion
+		#endregion
 
 		/// <summary>
 		/// Used to store encrypted Quaternion.

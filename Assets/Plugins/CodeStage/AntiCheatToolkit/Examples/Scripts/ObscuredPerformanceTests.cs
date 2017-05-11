@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Text;
 using CodeStage.AntiCheat.Common;
 using CodeStage.AntiCheat.ObscuredTypes;
@@ -280,9 +281,9 @@ namespace CodeStage.AntiCheat.Examples
 			sw.Stop();
 			logBuilder.AppendLine("double:").AppendLine(sw.ElapsedMilliseconds + " ms");
 
-			if (dummy != 0) {}
-			if (obscured != 0) {}
-			if (notObscured != 0) {}
+			if (Math.Abs(dummy) > 0.00001d) {}
+			if (Math.Abs(obscured) > 0.00001d) {}
+			if (Math.Abs(notObscured) > 0.00001d) {}
 		}
 
 		private void TestFloat()
@@ -321,9 +322,9 @@ namespace CodeStage.AntiCheat.Examples
 			sw.Stop();
 			logBuilder.AppendLine("float:").AppendLine(sw.ElapsedMilliseconds + " ms");
 
-			if (dummy != 0) {}
-			if (obscured != 0) {}
-			if (notObscured != 0) {}
+			if (Math.Abs(dummy) > 0.00001f) {}
+			if (Math.Abs(obscured) > 0.00001f) {}
+			if (Math.Abs(notObscured) > 0.00001f) {}
 		}
 
 		private void TestInt()

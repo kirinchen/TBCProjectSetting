@@ -34,17 +34,24 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 #pragma warning restore 414
 
 		[SerializeField]
+		private bool inited;
+
+		[SerializeField]
 		private float fakeValue;
 
 		[SerializeField]
-		private bool inited;
+		private bool fakeValueActive;
 
-		private ObscuredFloat(ACTkByte4 value)
+		private ObscuredFloat(float value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
+			hiddenValue = InternalEncrypt(value);
 			hiddenValueOld = null;
-			fakeValue = 0;
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : 0f;
+			fakeValueActive = detectorRunning;
+
 			inited = true;
 		}
 
@@ -137,7 +144,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			float decrypted = InternalDecrypt();
 
-			currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			do
+			{
+				currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			} while (currentCryptoKey == 0);
+
 			hiddenValue = InternalEncrypt(decrypted, currentCryptoKey);
 		}
 
@@ -164,7 +175,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		public void SetEncrypted(int encrypted)
 		{
 			inited = true;
-			FloatIntBytesUnion union = new FloatIntBytesUnion();
+			var union = new FloatIntBytesUnion();
 			union.i = encrypted;
 
 			hiddenValue = union.b4;
@@ -172,7 +183,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public float GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private float InternalDecrypt()
@@ -182,7 +208,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 				currentCryptoKey = cryptoKey;
 				hiddenValue = InternalEncrypt(0);
 				fakeValue = 0;
+				fakeValueActive = false;
 				inited = true;
+
+				return 0;
 			}
 
 			var union = new FloatIntBytesUnion();
@@ -192,7 +221,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 			float decrypted = union.f;
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValue != 0 && Math.Abs(decrypted - fakeValue) > Detectors.ObscuredCheatingDetector.Instance.floatEpsilon)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && Math.Abs(decrypted - fakeValue) > Detectors.ObscuredCheatingDetector.Instance.floatEpsilon)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -200,29 +229,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			return decrypted;
 		}
 
-		[StructLayout(LayoutKind.Explicit)]
-		private struct FloatIntBytesUnion
-		{
-			[FieldOffset(0)]
-			public float f;
-
-			[FieldOffset(0)]
-			public int i;
-
-			[FieldOffset(0)]
-			public ACTkByte4 b4;
-		}
 		//! @cond
-
 		#region operators, overrides, interface implementations
 		public static implicit operator ObscuredFloat(float value)
 		{
-			ObscuredFloat obscured = new ObscuredFloat(InternalEncrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return new ObscuredFloat(value);
 		}
 
 		public static implicit operator float(ObscuredFloat value)
@@ -238,6 +249,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
+			}
+			else
+			{
+				input.fakeValueActive = false;
 			}
 
 			return input;
@@ -251,6 +267,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
+			}
+			else
+			{
+				input.fakeValueActive = false;
 			}
 
 			return input;
@@ -355,5 +376,17 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		//! @endcond
 		#endregion
 
+		[StructLayout(LayoutKind.Explicit)]
+		private struct FloatIntBytesUnion
+		{
+			[FieldOffset(0)]
+			public float f;
+
+			[FieldOffset(0)]
+			public int i;
+
+			[FieldOffset(0)]
+			public ACTkByte4 b4;
+		}
 	}
 }

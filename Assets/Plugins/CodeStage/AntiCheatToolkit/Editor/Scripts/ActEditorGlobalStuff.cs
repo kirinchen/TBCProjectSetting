@@ -1,22 +1,21 @@
-﻿using System.IO;
+﻿#if UNITY_EDITOR
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-#if UNITY_EDITOR
 // allows to use internal methods in editor code from the editor code (Prefs editor window)
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Assembly-CSharp-Editor")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Assembly-CSharp-Editor-firstpass")] // thx Daniele! ;)
-#endif
 
 namespace CodeStage.AntiCheat.EditorCode
 {
 	internal class ActEditorGlobalStuff
 	{
 		internal const string LOG_PREFIX = "[ACTk] ";
-		internal const string WINDOWS_MENU_PATH = "Window/Code Stage/Anti-Cheat Toolkit/";
+		internal const string WINDOWS_MENU_PATH = "Tools/Code Stage/Anti-Cheat Toolkit/";
 
 		internal const string PREFS_INJECTION_ENABLED = "ACTDIDEnabledGlobal";
 		internal const string REPORT_EMAIL = "support@codestage.ru";
@@ -235,3 +234,4 @@ namespace CodeStage.AntiCheat.EditorCode
 		}
 	}
 }
+#endif

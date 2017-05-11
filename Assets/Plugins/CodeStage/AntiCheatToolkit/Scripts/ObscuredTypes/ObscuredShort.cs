@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace CodeStage.AntiCheat.ObscuredTypes
@@ -17,16 +18,30 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		public static short cryptoKeyEditor = cryptoKey;
 #endif
 
+		[SerializeField]
 		private short currentCryptoKey;
+
+		[SerializeField]
 		private short hiddenValue;
-		private short fakeValue;
+
+		[SerializeField]
 		private bool inited;
+
+		[SerializeField]
+		private short fakeValue;
+
+		[SerializeField]
+		private bool fakeValueActive;
 
 		private ObscuredShort(short value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
-			fakeValue = 0;
+			hiddenValue = EncryptDecrypt(value);
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : (short)0;
+			fakeValueActive = detectorRunning;
+
 			inited = true;
 		}
 
@@ -82,7 +97,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			short decrypted = InternalDecrypt();
 
-			currentCryptoKey = (short)Random.Range(short.MinValue, short.MaxValue);
+			do
+			{
+				currentCryptoKey = (short)Random.Range(short.MinValue, short.MaxValue);
+			} while (currentCryptoKey == 0);
 			hiddenValue = EncryptDecrypt(decrypted, currentCryptoKey);
 		}
 
@@ -110,7 +128,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public short GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private short InternalDecrypt()
@@ -120,12 +153,15 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 				currentCryptoKey = cryptoKey;
 				hiddenValue = EncryptDecrypt(0);
 				fakeValue = 0;
+				fakeValueActive = false;
 				inited = true;
+
+				return 0;
 			}
 
 			short decrypted = EncryptDecrypt(hiddenValue, currentCryptoKey);
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValue != 0 && decrypted != fakeValue)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && decrypted != fakeValue)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -137,12 +173,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		//! @cond
 		public static implicit operator ObscuredShort(short value)
 		{
-			ObscuredShort obscured = new ObscuredShort(EncryptDecrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return new ObscuredShort(value);
 		}
 
 		public static implicit operator short(ObscuredShort value)
@@ -158,7 +189,13 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
 			}
+			else
+			{
+				input.fakeValueActive = false;
+			}
+
 			return input;
 		}
 
@@ -170,7 +207,13 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
 			}
+			else
+			{
+				input.fakeValueActive = false;
+			}
+
 			return input;
 		}
 

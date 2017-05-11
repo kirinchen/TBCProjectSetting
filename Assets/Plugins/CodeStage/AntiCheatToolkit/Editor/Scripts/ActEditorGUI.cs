@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,6 +7,23 @@ namespace CodeStage.AntiCheat.EditorCode
 {
 	internal struct ActEditorGUI : IDisposable
 	{
+
+		private static GUIStyle richMiniLabel;
+		internal static GUIStyle RichMiniLabel
+		{
+			get
+			{
+				if (richMiniLabel == null)
+				{
+					richMiniLabel = new GUIStyle(EditorStyles.miniLabel);
+					richMiniLabel.wordWrap = true;
+					richMiniLabel.richText = true;
+				}
+
+				return richMiniLabel;
+			}
+		}
+
 		private static GUIStyle richLabel;
 		internal static GUIStyle RichLabel
 		{
@@ -329,3 +347,4 @@ namespace CodeStage.AntiCheat.EditorCode
 		#endregion
 	}
 }
+#endif

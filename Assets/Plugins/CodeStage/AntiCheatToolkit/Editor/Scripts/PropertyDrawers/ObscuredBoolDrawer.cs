@@ -1,4 +1,5 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
+﻿#if UNITY_EDITOR
+using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,9 +14,9 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 			SetBoldIfValueOverridePrefab(prop, hiddenValue);
 
 			SerializedProperty cryptoKey = prop.FindPropertyRelative("currentCryptoKey");
-			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
-			SerializedProperty fakeValueChanged = prop.FindPropertyRelative("fakeValueChanged");
 			SerializedProperty inited = prop.FindPropertyRelative("inited");
+			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
+			SerializedProperty fakeValueActive = prop.FindPropertyRelative("fakeValueActive");
 
 			int currentCryptoKey = cryptoKey.intValue;
 			bool val = false;
@@ -37,11 +38,15 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 			EditorGUI.BeginChangeCheck();
 			val = EditorGUI.Toggle(position, label, val);
 			if (EditorGUI.EndChangeCheck())
+			{
 				hiddenValue.intValue = ObscuredBool.Encrypt(val, (byte)currentCryptoKey);
 
-			fakeValue.boolValue = val;
-			fakeValueChanged.boolValue = true;
+				fakeValue.boolValue = val;
+				fakeValueActive.boolValue = true;
+			}
+			
 			ResetBoldFont();
 		}
 	}
 }
+#endif

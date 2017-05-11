@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 
 namespace CodeStage.AntiCheat.EditorCode
 {
@@ -35,3 +36,4 @@ namespace CodeStage.AntiCheat.EditorCode
 		}
 	}
 }
+#endif

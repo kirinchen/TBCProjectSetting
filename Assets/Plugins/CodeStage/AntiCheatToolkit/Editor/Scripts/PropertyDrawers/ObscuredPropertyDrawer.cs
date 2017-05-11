@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿#if UNITY_EDITOR
+using System.Reflection;
 using UnityEditor;
 
 namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
@@ -30,3 +31,4 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 		}
 	}
 }
+#endif

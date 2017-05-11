@@ -82,6 +82,7 @@ namespace CodeStage.AntiCheat.Examples
 		private bool injectionDetected;
 #endif
 		private bool speedHackDetected;
+		private bool timeCheatingDetected;
 		private bool obscuredTypeCheatDetected;
 		private bool wallHackCheatDetected;
 
@@ -94,6 +95,12 @@ namespace CodeStage.AntiCheat.Examples
 		{
 			speedHackDetected = true;
 			Debug.Log("Speed hack Detected!");
+		}
+
+		public void OnTimeCheatingDetected()
+		{
+			timeCheatingDetected = true;
+			Debug.Log("Time cheating Detected!");
 		}
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_ANDROID
@@ -584,6 +591,10 @@ namespace CodeStage.AntiCheat.Examples
 					GUILayout.Label("Allows to detect Cheat Engine's speed hack (and maybe some other speed hack tools) usage.");
                     GUILayout.Label("<color=\"" + (speedHackDetected ? RED_COLOR : GREEN_COLOR) + "\">Detected: " + speedHackDetected.ToString().ToLower() + "</color>");
 					GUILayout.Space(10);
+					GUILayout.Label("<b>" + TimeCheatingDetector.COMPONENT_NAME + "</b> (updates once per 1 min by default)");
+					GUILayout.Label("Allows to detect system time change to cheat some long-term processes (building progress, etc.).");
+                    GUILayout.Label("<color=\"" + (timeCheatingDetected ? RED_COLOR : GREEN_COLOR) + "\">Detected: " + timeCheatingDetected.ToString().ToLower() + "</color>");
+					GUILayout.Space(10);
                     GUILayout.Label("<b>" + ObscuredCheatingDetector.COMPONENT_NAME + "</b>");
 					GUILayout.Label("Detects cheating of any Obscured type (except ObscuredPrefs, it has own detection features) used in project.");
 					GUILayout.Label("<color=\"" + (obscuredTypeCheatDetected ? RED_COLOR : GREEN_COLOR) + "\">Detected: " + obscuredTypeCheatDetected.ToString().ToLower() + "</color>");
@@ -606,31 +617,40 @@ namespace CodeStage.AntiCheat.Examples
 
 		private string GetAllSimpleObscuredTypes()
 		{
-			string result = "Can't get the list, sorry :(";
+			string result = "Can't use reflection here, sorry :(";
 #if !UNITY_WINRT
 			string types = "";
 
 			if (string.IsNullOrEmpty(allSimpleObscuredTypes))
-			{
-				var q = from t in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-				        where t.IsPublic && t.Namespace == "CodeStage.AntiCheat.ObscuredTypes" && t.Name != "ObscuredPrefs"
-				        select t;
-				q.ToList().ForEach(t =>
+			{	
+				System.Reflection.Assembly csharpAssembly = AppDomain.CurrentDomain.GetAssemblies().
+															SingleOrDefault(assembly => assembly.GetName().Name == "Assembly-CSharp-firstpass");
+				if (csharpAssembly != null)
 				{
-					if (types.Length > 0)
+					var q = from t in csharpAssembly.GetTypes()
+							where t.IsPublic && t.Namespace == "CodeStage.AntiCheat.ObscuredTypes" && t.Name != "ObscuredPrefs"
+							select t;
+					q.ToList().ForEach(t =>
 					{
-						types += "\n" + (t.Name);
+						if (types.Length > 0)
+						{
+							types += "\n" + (t.Name);
+						}
+						else
+						{
+							types += (t.Name);
+						}
+					});
+
+					if (!string.IsNullOrEmpty(types))
+					{
+						result = types;
+						allSimpleObscuredTypes = types;
 					}
 					else
 					{
-						types += (t.Name);
+						allSimpleObscuredTypes = result;
 					}
-				});
-
-				if (!string.IsNullOrEmpty(types))
-				{
-					result = types;
-					allSimpleObscuredTypes = types;
 				}
 			}
 			else
@@ -650,7 +670,9 @@ namespace CodeStage.AntiCheat.Examples
 				   "<color=\"#75C4EB\">" +
                    "uint\n" +
 			       "double\n" +
+			       "decimal\n" +
 			       "long\n" +
+			       "ulong\n" +
 			       "bool\n" +
 			       "byte[]\n" +
 			       "Vector2\n" +

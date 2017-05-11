@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using CodeStage.AntiCheat.Common;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace CodeStage.AntiCheat.ObscuredTypes
@@ -21,22 +20,21 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 #endif
 
 		private long currentCryptoKey;
-	
-		[FormerlySerializedAs("hiddenValue")]
-#pragma warning disable 414
-		private byte[] hiddenValueOld;
-#pragma warning restore 414
-
 		private ACTkByte16 hiddenValue;
-		private decimal fakeValue;
 		private bool inited;
 
-		private ObscuredDecimal(ACTkByte16 value)
+		private decimal fakeValue;
+		private bool fakeValueActive;
+
+		private ObscuredDecimal(decimal value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
-			hiddenValueOld = null;
-			fakeValue = 0m;
+			hiddenValue = InternalEncrypt(value);
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : 0m;
+			fakeValueActive = detectorRunning;
+
 			inited = true;
 		}
 
@@ -132,7 +130,12 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			decimal decrypted = InternalDecrypt();
 
-			currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			do
+			{
+				currentCryptoKey = Random.Range(int.MinValue, int.MaxValue);
+			}
+			while (currentCryptoKey == 0);
+
 			hiddenValue = InternalEncrypt(decrypted, currentCryptoKey);
 		}
 
@@ -145,7 +148,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			ApplyNewCryptoKey();
 
-			DecimalLongBytesUnion union = new DecimalLongBytesUnion();
+			var union = new DecimalLongBytesUnion();
 			union.b16 = hiddenValue;
 
 			return union.d;
@@ -159,7 +162,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		public void SetEncrypted(decimal encrypted)
 		{
 			inited = true;
-			DecimalLongBytesUnion union = new DecimalLongBytesUnion();
+			var union = new DecimalLongBytesUnion();
 			union.d = encrypted;
 
 			hiddenValue = union.b16;
@@ -167,7 +170,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public decimal GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private decimal InternalDecrypt()
@@ -177,7 +195,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 				currentCryptoKey = cryptoKey;
 				hiddenValue = InternalEncrypt(0m);
 				fakeValue = 0m;
+				fakeValueActive = false;
 				inited = true;
+
+				return 0m;
 			}
 
 			DecimalLongBytesUnion union = new DecimalLongBytesUnion();
@@ -188,7 +209,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 			decimal decrypted = union.d;
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValue != 0 && decrypted != fakeValue)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && decrypted != fakeValue)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -196,32 +217,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			return decrypted;
 		}
 
-		[StructLayout(LayoutKind.Explicit)]
-		private struct DecimalLongBytesUnion
-		{
-			[FieldOffset(0)]
-			public decimal d;
-
-			[FieldOffset(0)]
-			public long l1;
-
-			[FieldOffset(8)]
-			public long l2;
-
-			[FieldOffset(0)]
-			public ACTkByte16 b16;
-		}
-
 		#region operators, overrides, interface implementations
 		//! @cond
 		public static implicit operator ObscuredDecimal(decimal value)
 		{
-			ObscuredDecimal obscured = new ObscuredDecimal(InternalEncrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return new ObscuredDecimal(value);
 		}
 
 		public static implicit operator decimal(ObscuredDecimal value)
@@ -242,6 +242,11 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
+			}
+			else
+			{
+				input.fakeValueActive = false;
 			}
 
 			return input;
@@ -255,7 +260,13 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				input.fakeValue = decrypted;
+				input.fakeValueActive = true;
 			}
+			else
+			{
+				input.fakeValueActive = false;
+			}
+
 			return input;
 		}
 
@@ -352,5 +363,21 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		}
 		//! @endcond
 		#endregion
+
+		[StructLayout(LayoutKind.Explicit)]
+		private struct DecimalLongBytesUnion
+		{
+			[FieldOffset(0)]
+			public decimal d;
+
+			[FieldOffset(0)]
+			public long l1;
+
+			[FieldOffset(8)]
+			public long l2;
+
+			[FieldOffset(0)]
+			public ACTkByte16 b16;
+		}
 	}
 }

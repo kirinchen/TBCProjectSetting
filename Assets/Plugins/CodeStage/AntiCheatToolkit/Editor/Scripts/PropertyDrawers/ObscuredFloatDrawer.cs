@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿#if UNITY_EDITOR
+using System.Runtime.InteropServices;
 using CodeStage.AntiCheat.Common;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEditor;
@@ -34,12 +35,13 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 			SetBoldIfValueOverridePrefab(prop, hiddenValue);
 
 			SerializedProperty cryptoKey = prop.FindPropertyRelative("currentCryptoKey");
-			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
 			SerializedProperty inited = prop.FindPropertyRelative("inited");
+			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
+			SerializedProperty fakeValueActive = prop.FindPropertyRelative("fakeValueActive");
 
 			int currentCryptoKey = cryptoKey.intValue;
 
-			IntBytesUnion union = new IntBytesUnion();
+			var union = new IntBytesUnion();
 			float val = 0;
 
 			if (!inited.boolValue)
@@ -73,8 +75,8 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 					union.b4.b3 = (byte)hiddenValue3.intValue;
 					union.b4.b4 = (byte)hiddenValue4.intValue;
 				}
-				
 
+				/*Debug.Log("Int: " + union.i);*/
 				val = ObscuredFloat.Decrypt(union.i, currentCryptoKey);
 			}
 
@@ -93,9 +95,11 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 				{
 					hiddenValueOld.arraySize = 0;
 				}
-			}
 
-			fakeValue.floatValue = val;
+				fakeValue.floatValue = val;
+				fakeValueActive.boolValue = true;
+			}
+			
 			ResetBoldFont();
 		}
 
@@ -110,3 +114,4 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 		}
 	}
 }
+#endif

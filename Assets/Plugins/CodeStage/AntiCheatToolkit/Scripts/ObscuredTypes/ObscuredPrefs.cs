@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using CodeStage.AntiCheat.Common;
 using CodeStage.AntiCheat.Utils;
@@ -603,6 +604,81 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		}
 		#endregion
 
+		#region decimal
+		/// <summary>
+		/// Sets the <c>value</c> of the preference identified by <c>key</c>.
+		/// </summary>
+		public static void SetDecimal(string key, decimal value)
+		{
+#if UNITY_EDITOR
+			if (unobscuredMode) WriteUnobscured(key, value);
+#endif
+
+#if UNITY_WEBPLAYER
+			try
+			{
+				PlayerPrefs.SetString(EncryptKey(key), EncryptDecimalValue(key, value));
+			}
+			catch (PlayerPrefsException exception)
+			{
+				Debug.LogException(exception);
+			}
+#else
+			PlayerPrefs.SetString(EncryptKey(key), EncryptDecimalValue(key, value));
+#endif
+		}
+
+		/// <summary>
+		/// Returns the value corresponding to <c>key</c> in the preference file if it exists.
+		/// If it doesn't exist, it will return 0.
+		/// </summary>
+		public static decimal GetDecimal(string key)
+		{
+			return GetDecimal(key, 0);
+		}
+
+		/// <summary>
+		/// Returns the value corresponding to <c>key</c> in the preference file if it exists.
+		/// If it doesn't exist, it will return <c>defaultValue</c>.
+		/// </summary>
+		public static decimal GetDecimal(string key, decimal defaultValue)
+		{
+#if UNITY_EDITOR
+			if (unobscuredMode) return decimal.Parse(ReadUnobscured(key, defaultValue));
+#endif
+			string encrypted = GetEncryptedPrefsString(key, EncryptKey(key));
+			return encrypted == RAW_NOT_FOUND ? defaultValue : DecryptDecimalValue(key, encrypted, defaultValue);
+		}
+
+		private static string EncryptDecimalValue(string key, decimal value)
+		{
+			byte[] cleanBytes = BitconverterExt.GetBytes(value);
+			return EncryptData(key, cleanBytes, DataType.Decimal);
+		}
+
+		private static decimal DecryptDecimalValue(string key, string encryptedInput, decimal defaultValue)
+		{
+			if (encryptedInput.IndexOf(DEPRECATED_RAW_SEPARATOR) > -1)
+			{
+				string deprecatedValue = DeprecatedDecryptValue(encryptedInput);
+				if (deprecatedValue == "") return defaultValue;
+				decimal deprecatedResult;
+				decimal.TryParse(deprecatedValue, out deprecatedResult);
+				SetDecimal(key, deprecatedResult);
+				return deprecatedResult;
+			}
+
+			byte[] cleanBytes = DecryptData(key, encryptedInput);
+			if (cleanBytes == null)
+			{
+				return defaultValue;
+			}
+
+			decimal cleanValue = BitconverterExt.ToDecimal(cleanBytes);
+			return cleanValue;
+		}
+		#endregion
+
 		#region long
 		/// <summary>
 		/// Sets the <c>value</c> of the preference identified by <c>key</c>.
@@ -674,6 +750,81 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			}
 
 			long cleanValue = BitConverter.ToInt64(cleanBytes, 0);
+			return cleanValue;
+		}
+		#endregion
+
+		#region ulong
+		/// <summary>
+		/// Sets the <c>value</c> of the preference identified by <c>key</c>.
+		/// </summary>
+		public static void SetULong(string key, ulong value)
+		{
+#if UNITY_EDITOR
+			if (unobscuredMode) WriteUnobscured(key, value);
+#endif
+
+#if UNITY_WEBPLAYER
+			try
+			{
+				PlayerPrefs.SetString(EncryptKey(key), EncryptULongValue(key, value));
+			}
+			catch (PlayerPrefsException exception)
+			{
+				Debug.LogException(exception);
+			}
+#else
+			PlayerPrefs.SetString(EncryptKey(key), EncryptULongValue(key, value));
+#endif
+		}
+
+		/// <summary>
+		/// Returns the value corresponding to <c>key</c> in the preference file if it exists.
+		/// If it doesn't exist, it will return 0.
+		/// </summary>
+		public static ulong GetULong(string key)
+		{
+			return GetULong(key, 0);
+		}
+
+		/// <summary>
+		/// Returns the value corresponding to <c>key</c> in the preference file if it exists.
+		/// If it doesn't exist, it will return <c>defaultValue</c>.
+		/// </summary>
+		public static ulong GetULong(string key, ulong defaultValue)
+		{
+#if UNITY_EDITOR
+			if (unobscuredMode) return ulong.Parse(ReadUnobscured(key, defaultValue));
+#endif
+			string encrypted = GetEncryptedPrefsString(key, EncryptKey(key));
+			return encrypted == RAW_NOT_FOUND ? defaultValue : DecryptULongValue(key, encrypted, defaultValue);
+		}
+
+		private static string EncryptULongValue(string key, ulong value)
+		{
+			byte[] cleanBytes = BitConverter.GetBytes(value);
+			return EncryptData(key, cleanBytes, DataType.ULong);
+		}
+
+		private static ulong DecryptULongValue(string key, string encryptedInput, ulong defaultValue)
+		{
+			if (encryptedInput.IndexOf(DEPRECATED_RAW_SEPARATOR) > -1)
+			{
+				string deprecatedValue = DeprecatedDecryptValue(encryptedInput);
+				if (deprecatedValue == "") return defaultValue;
+				ulong deprecatedResult;
+				ulong.TryParse(deprecatedValue, out deprecatedResult);
+				SetULong(key, deprecatedResult);
+				return deprecatedResult;
+			}
+
+			byte[] cleanBytes = DecryptData(key, encryptedInput);
+			if (cleanBytes == null)
+			{
+				return defaultValue;
+			}
+
+			ulong cleanValue = BitConverter.ToUInt64(cleanBytes, 0);
 			return cleanValue;
 		}
 		#endregion
@@ -1355,6 +1506,12 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 			result = (DataType)inputBytes[inputLength - 7];
 
+			byte verison = inputBytes[inputLength - 6];
+			if (verison > 10)
+			{
+				result = DataType.Unknown;
+			}
+
 			return result;
 		}
 
@@ -1626,7 +1783,9 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			String = 15,
 			Float = 20,
 			Double = 25,
+			Decimal = 27,
 			Long = 30,
+			ULong = 32,
 			Bool = 35,
 			ByteArray = 40,
 			Vector2 = 45,
@@ -1768,5 +1927,32 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			}
 		}
 		#endregion
+	}
+
+	// source:
+	// https://social.technet.microsoft.com/wiki/contents/articles/19055.convert-system-decimal-to-and-from-byte-arrays-vb-c.aspx
+	internal class BitconverterExt
+	{
+		public static byte[] GetBytes(decimal dec)
+		{
+			int[] bits = decimal.GetBits(dec);
+			var bytes = new List<byte>();
+			foreach (int i in bits)
+			{
+				bytes.AddRange(BitConverter.GetBytes(i));
+			}
+			return bytes.ToArray();
+		}
+		public static decimal ToDecimal(byte[] bytes)
+		{
+			if (bytes.Length != 16)
+				throw new Exception(Constants.LOG_PREFIX + "A decimal must be created from exactly 16 bytes");
+			var bits = new int[4];
+			for (int i = 0; i <= 15; i += 4)
+			{
+				bits[i / 4] = BitConverter.ToInt32(bytes, i);
+			}
+			return new decimal(bits);
+		}
 	}
 }

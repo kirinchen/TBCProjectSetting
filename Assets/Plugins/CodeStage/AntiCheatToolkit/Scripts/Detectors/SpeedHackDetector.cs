@@ -11,6 +11,7 @@
 using UnityEngine.SceneManagement;
 #endif
 
+using System;
 using CodeStage.AntiCheat.Common;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,6 +37,7 @@ namespace CodeStage.AntiCheat.Detectors
 
 		private const long TICKS_PER_SECOND = System.TimeSpan.TicksPerMillisecond * 1000;
 		private const int THRESHOLD = 5000000; // == 500 ms, allowed time difference between genuine and vulnerable ticks
+		private const float THRESHOLD_FLOAT = 0.5f; // == 500 ms, allowed time difference between genuine ticks and vulnerable time
 
 		private static int instancesInScene;
 
@@ -67,6 +69,7 @@ namespace CodeStage.AntiCheat.Detectors
 		private long vulnerableTicksOnStart;
 		private long prevTicks;
 		private long prevIntervalTicks;
+		private float vulnerableTimeOnStart;
 		#endregion
 
 		#region public static methods
@@ -259,46 +262,52 @@ namespace CodeStage.AntiCheat.Detectors
 
 			long intervalTicks = (long)(interval * TICKS_PER_SECOND);
 
-			if (ticks - prevIntervalTicks >= intervalTicks)
+			// return if configured interval is not passed yet
+			if (ticks - prevIntervalTicks < intervalTicks) return;
+
+			long ticksFromStart = ticks - ticksOnStart;
+
+			long vulnerableTicks = System.Environment.TickCount * System.TimeSpan.TicksPerMillisecond;
+			bool ticksCheated = Mathf.Abs((vulnerableTicks - vulnerableTicksOnStart) - (ticksFromStart)) > THRESHOLD;
+
+			float vulnerableTime = Time.realtimeSinceStartup;
+			bool timeCheated = Math.Abs((ticksFromStart) / (float)TICKS_PER_SECOND - (vulnerableTime - vulnerableTimeOnStart)) > THRESHOLD_FLOAT;
+
+			if (ticksCheated || timeCheated)
 			{
-				long vulnerableTicks = System.Environment.TickCount * System.TimeSpan.TicksPerMillisecond;
-
-				if (Mathf.Abs((vulnerableTicks - vulnerableTicksOnStart) - (ticks - ticksOnStart)) > THRESHOLD)
-				{
-					currentFalsePositives++;
-					if (currentFalsePositives > maxFalsePositives)
-					{
-#if ACTK_DEBUG_ENABLED
-						Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: final detection!", this);
-#endif
-						OnCheatingDetected();
-					}
-					else
-					{
-#if ACTK_DEBUG_ENABLED
-						Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: detection! Allowed false positives left: " + (maxFalsePositives - currentFalsePositives), this);
-#endif
-						currentCooldownShots = 0;
-						ResetStartTicks();
-					}
-				}
-				else if (currentFalsePositives > 0 && coolDown > 0)
+				currentFalsePositives++;
+				if (currentFalsePositives > maxFalsePositives)
 				{
 #if ACTK_DEBUG_ENABLED
-					Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: success shot! Shots till cool down: " + (coolDown - currentCooldownShots), this);
+					Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: final detection!", this);
 #endif
-					currentCooldownShots++;
-					if (currentCooldownShots >= coolDown)
-					{
-#if ACTK_DEBUG_ENABLED
-						Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: cool down!", this);
-#endif
-						currentFalsePositives = 0;
-					}
+					OnCheatingDetected();
 				}
-
-				prevIntervalTicks = ticks;
+				else
+				{
+#if ACTK_DEBUG_ENABLED
+					Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: detection! Allowed false positives left: " + (maxFalsePositives - currentFalsePositives), this);
+#endif
+					currentCooldownShots = 0;
+					ResetStartTicks();
+				}
 			}
+			else if (currentFalsePositives > 0 && coolDown > 0)
+			{
+#if ACTK_DEBUG_ENABLED
+				Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: success shot! Shots till cool down: " + (coolDown - currentCooldownShots), this);
+#endif
+				currentCooldownShots++;
+				if (currentCooldownShots >= coolDown)
+				{
+#if ACTK_DEBUG_ENABLED
+					Debug.LogWarning(Constants.LOG_PREFIX + "SpeedHackDetector: cool down!", this);
+#endif
+					currentFalsePositives = 0;
+				}
+			}
+
+			prevIntervalTicks = ticks;
 		}
 		#endregion
 
@@ -379,6 +388,8 @@ namespace CodeStage.AntiCheat.Detectors
 			vulnerableTicksOnStart = System.Environment.TickCount * System.TimeSpan.TicksPerMillisecond;
 			prevTicks = ticksOnStart;
 			prevIntervalTicks = ticksOnStart;
+
+			vulnerableTimeOnStart = Time.realtimeSinceStartup;
 		}
 	}
 }

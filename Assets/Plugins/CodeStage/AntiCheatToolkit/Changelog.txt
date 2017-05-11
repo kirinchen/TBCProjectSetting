@@ -1,5 +1,52 @@
 ﻿Please, always remove previous Anti-Cheat Toolkit version before updating!
 
+1.5.6.0
+- brand new TimeCheatingDetector (needs Internet connection)
+- another kind of SpeedHack detection added (thx lol)
+- third-party integration packages paths are match ACTk path now
+- added switches for all important conditional compilation symbols 
+  to the Settings window
+- improved Unity 2017 compatibility
+
+1.5.5.0
+- menu items migrated to the "Tools > Code Stage > Anti-Cheat Toolkit"
+- added new utility script to migrate ObscuredDouble and ObscuredFloat 
+  instances on prefabs when updating from 1.5.1.0 and previous to the 
+  1.5.2.0 +; you can run it via menu Tools > Code Stage > ACTk > Migrate...
+- improved compatibility with Unity 5.5+
+- fixed ObscuredCheatingDetector false positives (huge thx Fiete)
+- fixed vulnerability of the obscured types
+- fixed ObscuredShort inspector output in Unity 5.0+
+- fixed false cheating detections for obscured types which are able to 
+  show up in the inspector in some cases (thx mrm83)
+
+1.5.4.0
+- added (x,y) constructor and same Encrypt API to the ObscuredVector2
+- added (x,y,z) constructor and same Encrypt API to the ObscuredVector3
+- added (x,y,z,w) constructor and same Encrypt API to the ObscuredQuaternion
+- added new GetDecrypted API to all obscured memory types
+- added ObscuredShort inspector output for Unity 5.0+
+- fixed incorrect InjectionDetector execution with argument in callback
+
+1.5.3.0
+- plugin moved to Plugins folder, please remove previous ACTk version!
+- added ObscuredString.Length property for better compatibility
+- added ULong support to the ObscuredPrefs
+- added Decimal support to the ObscuredPrefs
+- added ObscuredUInt inspector output for Unity 5.0+
+- added ObscuredULong inspector output for Unity 5.0+
+
+1.5.2.3
+- improved Unity 5.6 compatibility
+- added workaround for a Unity bug related to ObscuredDouble on prefabs
+
+1.5.2.2
+- updated InjectionDetector whitelist up to the Unity 5.5
+- fixed possible data corruption leading to false positives in Obscured types
+- updated third-party integration packages to the new APIs
+- improved compatibility with Unity 5.5
+- reduced chance of the wrong encrypted pref detection at the prefs editor
+
 1.5.2.1
 - added back classic parameterless callback support to the InjectionDetector
 

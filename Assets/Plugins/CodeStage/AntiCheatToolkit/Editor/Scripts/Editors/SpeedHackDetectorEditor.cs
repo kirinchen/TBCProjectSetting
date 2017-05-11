@@ -1,4 +1,5 @@
-﻿using CodeStage.AntiCheat.Detectors;
+﻿#if UNITY_EDITOR
+using CodeStage.AntiCheat.Detectors;
 using UnityEditor;
 
 namespace CodeStage.AntiCheat.EditorCode.Editors
@@ -25,3 +26,4 @@ namespace CodeStage.AntiCheat.EditorCode.Editors
 		}
 	}
 }
+#endif

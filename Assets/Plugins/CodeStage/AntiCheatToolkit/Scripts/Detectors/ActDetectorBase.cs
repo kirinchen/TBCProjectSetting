@@ -67,6 +67,7 @@ namespace CodeStage.AntiCheat.Detectors
 			AddObscuredCheatingDetectorToScene();
 			AddSpeedHackDetectorToScene();
 			AddWallHackDetectorToScene();
+			AddTimeCheatingDetectorToScene();
 		}
 
 		[UnityEditor.MenuItem(GAME_OBJECT_MENU_PATH + InjectionDetector.COMPONENT_NAME, false, 1)]
@@ -91,6 +92,12 @@ namespace CodeStage.AntiCheat.Detectors
 		private static void AddWallHackDetectorToScene()
 		{
 			SetupDetectorInScene<WallHackDetector>();
+		}
+
+		[UnityEditor.MenuItem(GAME_OBJECT_MENU_PATH + TimeCheatingDetector.COMPONENT_NAME, false, 1)]
+		private static void AddTimeCheatingDetectorToScene()
+		{
+			SetupDetectorInScene<TimeCheatingDetector>();
 		}
 
 		private static void SetupDetectorInScene<T>() where T : ActDetectorBase

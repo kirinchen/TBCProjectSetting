@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -538,6 +539,10 @@ namespace CodeStage.AntiCheat.EditorCode.Windows
 			keys.Remove("Screenmanager Resolution Width");
 			keys.Remove("Screenmanager Resolution Height");
 			keys.Remove("Screenmanager Is Fullscreen mode");
+			keys.Remove("unity.cloud_userid");
+			keys.Remove("unity.player_session_background_time");
+			keys.Remove("unity.player_session_elapsed_time");
+			keys.Remove("unity.player_sessionid");
 
 			if (allRecords == null) allRecords = new List<PrefsRecord>();
 			if (filteredRecords == null) filteredRecords = new List<PrefsRecord>();
@@ -612,7 +617,11 @@ namespace CodeStage.AntiCheat.EditorCode.Windows
 
 		private string[] ReadKeysWin()
 		{
+#if UNITY_5_5_OR_NEWER
+			RegistryKey registryLocation = Registry.CurrentUser.CreateSubKey("Software\\Unity\\UnityEditor\\" + PlayerSettings.companyName + "\\" + PlayerSettings.productName);
+#else
 			RegistryKey registryLocation = Registry.CurrentUser.CreateSubKey("Software\\" + PlayerSettings.companyName + "\\" + PlayerSettings.productName);
+#endif
 			if (registryLocation == null)
 			{
 				return new string[0];
@@ -1200,3 +1209,4 @@ namespace CodeStage.AntiCheat.EditorCode.Windows
 #endregion
 	}
 }
+#endif

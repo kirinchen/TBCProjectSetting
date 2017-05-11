@@ -25,19 +25,26 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		private byte[] hiddenValue;
 
 		[SerializeField]
+		private bool inited;
+
+		[SerializeField]
 		private string fakeValue;
 
 		[SerializeField]
-		private bool inited;
+		private bool fakeValueActive;
 
 		// for serialization purposes
 		private ObscuredString(){}
 
-		private ObscuredString(byte[] value)
+		private ObscuredString(string value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
-			fakeValue = null;
+			hiddenValue = InternalEncrypt(value);
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : null;
+			fakeValueActive = detectorRunning;
+
 			inited = true;
 		}
 
@@ -56,7 +63,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		/// <returns>Encrypted or decrypted <c>string</c> (depending on what <c>string</c> was passed to the function)</returns>
 		public static string EncryptDecrypt(string value)
 		{
-			return EncryptDecrypt(value, "");
+			return EncryptDecrypt(value, string.Empty);
 		}
 
 		/// <summary>
@@ -67,7 +74,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			if (string.IsNullOrEmpty(value))
 			{
-				return "";
+				return string.Empty;
 			}
 
 			if (string.IsNullOrEmpty(key))
@@ -137,7 +144,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public string GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private static byte[] InternalEncrypt(string value)
@@ -155,9 +177,12 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (!inited)
 			{
 				currentCryptoKey = cryptoKey;
-				hiddenValue = InternalEncrypt("");
-				fakeValue = "";
+				hiddenValue = InternalEncrypt(string.Empty);
+				fakeValue = string.Empty;
+				fakeValueActive = false;
 				inited = true;
+
+				return string.Empty;
 			}
 
 			string key = currentCryptoKey;
@@ -168,7 +193,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 			string result = EncryptDecrypt(GetString(hiddenValue), key);
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && !string.IsNullOrEmpty(fakeValue) && result != fakeValue)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && result != fakeValue)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -177,29 +202,26 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		}
 
 		#region operators and overrides
+
+		// ----------------------------------------------------------------------------
+		// operators, overrides, proxies
+		// ----------------------------------------------------------------------------
+
 		//! @cond
+
+		public int Length
+		{
+			get { return hiddenValue.Length / sizeof(char); }
+		}
+
 		public static implicit operator ObscuredString(string value)
 		{
-			if (value == null)
-			{
-				return null;
-			}
-
-			ObscuredString obscured = new ObscuredString(InternalEncrypt(value));
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-			}
-			return obscured;
+			return value == null ? null : new ObscuredString(value);
 		}
 
 		public static implicit operator string(ObscuredString value)
 		{
-			if (value == null)
-			{
-				return null;
-			}
-			return value.InternalDecrypt();
+			return value == null ? null : value.InternalDecrypt();
 		}
 
 		/// <summary>
@@ -318,7 +340,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 		private static byte[] GetBytes(string str)
 		{
-			byte[] bytes = new byte[str.Length * sizeof(char)];
+			var bytes = new byte[str.Length * sizeof(char)];
 			System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
 			return bytes;
 		}

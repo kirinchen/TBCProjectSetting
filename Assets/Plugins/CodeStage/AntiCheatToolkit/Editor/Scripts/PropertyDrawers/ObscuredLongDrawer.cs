@@ -1,4 +1,5 @@
-﻿#define UNITY_5_0_PLUS
+﻿#if UNITY_EDITOR
+#define UNITY_5_0_PLUS
 #if UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
 #undef UNITY_5_0_PLUS
 #endif
@@ -21,8 +22,9 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 			SetBoldIfValueOverridePrefab(prop, hiddenValue);
 
 			SerializedProperty cryptoKey = prop.FindPropertyRelative("currentCryptoKey");
-			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
 			SerializedProperty inited = prop.FindPropertyRelative("inited");
+			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
+			SerializedProperty fakeValueActive = prop.FindPropertyRelative("fakeValueActive");
 
 			long currentCryptoKey = cryptoKey.longValue;
 			long val = 0;
@@ -35,6 +37,7 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 				}
 				hiddenValue.longValue = ObscuredLong.Encrypt(0, currentCryptoKey);
 				inited.boolValue = true;
+				fakeValue.longValue = 0;
 			}
 			else
 			{
@@ -44,11 +47,15 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 			EditorGUI.BeginChangeCheck();
 			val = EditorGUI.LongField(position, label, val);
 			if (EditorGUI.EndChangeCheck())
+			{
 				hiddenValue.longValue = ObscuredLong.Encrypt(val, currentCryptoKey);
-
-			fakeValue.longValue = val;
+				fakeValue.longValue = val;
+				fakeValueActive.boolValue = true;
+			}
+			
 			ResetBoldFont();
 #endif
 		}
 	}
 }
+#endif

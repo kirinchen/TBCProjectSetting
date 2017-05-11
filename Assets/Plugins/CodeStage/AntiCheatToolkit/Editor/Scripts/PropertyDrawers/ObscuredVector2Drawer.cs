@@ -1,4 +1,5 @@
-﻿using CodeStage.AntiCheat.ObscuredTypes;
+﻿#if UNITY_EDITOR
+using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,8 +16,9 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 			SetBoldIfValueOverridePrefab(prop, hiddenValue);
 
 			SerializedProperty cryptoKey = prop.FindPropertyRelative("currentCryptoKey");
-			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
 			SerializedProperty inited = prop.FindPropertyRelative("inited");
+			SerializedProperty fakeValue = prop.FindPropertyRelative("fakeValue");
+			SerializedProperty fakeValueActive = prop.FindPropertyRelative("fakeValueActive");
 
 			int currentCryptoKey = cryptoKey.intValue;
 			Vector2 val = Vector2.zero;
@@ -31,6 +33,7 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 				hiddenValueX.intValue = ev.x;
 				hiddenValueY.intValue = ev.y;
                 inited.boolValue = true;
+				fakeValue.vector2Value = Vector2.zero;
 			}
 			else
 			{
@@ -47,8 +50,10 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 				ObscuredVector2.RawEncryptedVector2 ev = ObscuredVector2.Encrypt(val, currentCryptoKey);
 				hiddenValueX.intValue = ev.x;
 				hiddenValueY.intValue = ev.y;
+				fakeValue.vector2Value = val;
+				fakeValueActive.boolValue = true;
 			}
-			fakeValue.vector2Value = val;
+			
 			ResetBoldFont();
 		}
 
@@ -58,3 +63,4 @@ namespace CodeStage.AntiCheat.EditorCode.PropertyDrawers
 		}
 	}
 }
+#endif

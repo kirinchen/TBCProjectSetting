@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace CodeStage.AntiCheat.ObscuredTypes
@@ -25,20 +26,25 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		private int hiddenValue;
 
 		[SerializeField]
+		private bool inited;
+
+		[SerializeField]
 		private bool fakeValue;
 
 		[SerializeField]
-		private bool fakeValueChanged;
+		[FormerlySerializedAs("fakeValueChanged")]
+		private bool fakeValueActive;
+		
 
-		[SerializeField]
-		private bool inited;
-
-		private ObscuredBool(int value)
+		private ObscuredBool(bool value)
 		{
 			currentCryptoKey = cryptoKey;
-			hiddenValue = value;
-			fakeValue = false;
-			fakeValueChanged = false;
+			hiddenValue = Encrypt(value);
+
+			bool detectorRunning = Detectors.ObscuredCheatingDetector.IsRunning;
+			fakeValue = detectorRunning ? value : false;
+			fakeValueActive = detectorRunning;
+			
 			inited = true;
 		}
 
@@ -50,20 +56,6 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		{
 			cryptoKey = newKey;
 		}
-
-		// will add something like this in future, this update is already full enough
-		/*public static ObscuredBool FromEncrypted(int encrypted)
-		{
-			ObscuredBool result = new ObscuredBool(encrypted);
-
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				result.fakeValue = Decrypt(encrypted);
-				result.fakeValueChanged = true;
-			}
-
-			return result;
-		}*/
 
 		/// <summary>
 		/// Use this simple encryption method to encrypt any bool value, uses default crypto key.
@@ -135,7 +127,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			bool decrypted = InternalDecrypt();
 
 			// here we just use first 8 bits of the integer
-			currentCryptoKey = (byte)Random.Range(0, 255);
+			currentCryptoKey = (byte)Random.Range(1, 150);
 			hiddenValue = Encrypt(decrypted, currentCryptoKey);
 		}
 
@@ -162,8 +154,22 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 			if (Detectors.ObscuredCheatingDetector.IsRunning)
 			{
 				fakeValue = InternalDecrypt();
-				fakeValueChanged = true;
+				fakeValueActive = true;
 			}
+			else
+			{
+				fakeValueActive = false;
+			}
+		}
+
+		/// <summary>
+		/// Alternative to the type cast, use if you wish to get decrypted value 
+		/// but can't or don't want to use cast to the regular type.
+		/// </summary>
+		/// <returns>Decrypted value.</returns>
+		public bool GetDecrypted()
+		{
+			return InternalDecrypt();
 		}
 
 		private bool InternalDecrypt()
@@ -173,8 +179,10 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 				currentCryptoKey = cryptoKey;
 				hiddenValue = Encrypt(false);
 				fakeValue = false;
-				fakeValueChanged = true;
+				fakeValueActive = false;
 				inited = true;
+
+				return false;
 			}
 
 			int value = hiddenValue;
@@ -182,7 +190,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 
 			bool decrypted = value != 181;
 
-			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueChanged && decrypted != fakeValue)
+			if (Detectors.ObscuredCheatingDetector.IsRunning && fakeValueActive && decrypted != fakeValue)
 			{
 				Detectors.ObscuredCheatingDetector.Instance.OnCheatingDetected();
 			}
@@ -194,15 +202,7 @@ namespace CodeStage.AntiCheat.ObscuredTypes
 		//! @cond
 		public static implicit operator ObscuredBool(bool value)
 		{
-			ObscuredBool obscured = new ObscuredBool(Encrypt(value));
-
-			if (Detectors.ObscuredCheatingDetector.IsRunning)
-			{
-				obscured.fakeValue = value;
-				obscured.fakeValueChanged = true;
-			}
-
-			return obscured;
+			return new ObscuredBool(value);
 		}
 
 		public static implicit operator bool(ObscuredBool value)
