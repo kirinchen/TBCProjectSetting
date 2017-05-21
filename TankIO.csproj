@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -1647,6 +1650,7 @@
     <Compile Include="Assets\tankio\Script\PlayGameUi\Dialog\YesNoDialog.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\DialogManager.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\EnergyBar.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\EscBox.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\ExitHandler.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\FakePlayerOverlay.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\HpBar.cs" />
@@ -1707,6 +1711,7 @@
     <Compile Include="Assets\tankio\Script\Room\MapDebugObjects.cs" />
     <Compile Include="Assets\tankio\Script\Room\RoomBundle.cs" />
     <Compile Include="Assets\tankio\Script\Room\RoomCreator.cs" />
+    <Compile Include="Assets\tankio\Script\SettingIAP\BgMusicChooser.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\BgMusicController.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\BuyCoinLister.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\CoinBuyer.cs" />
