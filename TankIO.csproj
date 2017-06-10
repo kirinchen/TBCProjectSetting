@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -197,6 +194,7 @@
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Forms\HTTPFormUsage.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Forms\Implementations\HTTPMultiPartForm.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Forms\Implementations\HTTPUrlEncodedForm.cs" />
+    <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Forms\Implementations\RawJSonForm.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\Forms\Implementations\UnityForm.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\HTTPConnection.cs" />
     <Compile Include="Assets\Best HTTP (Pro)\BestHTTP\HTTPConnectionStates.cs" />
@@ -1440,6 +1438,7 @@
     <Compile Include="Assets\tankio\Script\Dto\QuaternionDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\RevivalDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\ScoreUpdateDto.cs" />
+    <Compile Include="Assets\tankio\Script\Dto\SoulKillDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\StopFireDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\StopMoveDto.cs" />
     <Compile Include="Assets\tankio\Script\Dto\SurfMErrorDto.cs" />
@@ -1458,6 +1457,7 @@
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrPlusPlayTimeImpl.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrPluser.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\AttrTileOverlay.cs" />
+    <Compile Include="Assets\tankio\Script\ExpLevelAttr\MissionData.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\PlusAttrDto.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\TBCAttr.cs" />
     <Compile Include="Assets\tankio\Script\ExpLevelAttr\WeapinAttrCalacer\Cannon\CalcerBasicCannon.cs" />
@@ -1546,6 +1546,7 @@
     <Compile Include="Assets\tankio\Script\Index\Evolution\EvolutionPager.cs" />
     <Compile Include="Assets\tankio\Script\Index\Evolution\EvolutionTask.cs" />
     <Compile Include="Assets\tankio\Script\Index\GoIoScenButton.cs" />
+    <Compile Include="Assets\tankio\Script\Index\GoMissionLobbyButton.cs" />
     <Compile Include="Assets\tankio\Script\Index\HomePager.cs" />
     <Compile Include="Assets\tankio\Script\Index\IndexManager.cs" />
     <Compile Include="Assets\tankio\Script\Index\IndexPage.cs" />
@@ -1581,6 +1582,40 @@
     <Compile Include="Assets\tankio\Script\KillSystem\KillExpHandler.cs" />
     <Compile Include="Assets\tankio\Script\KillSystem\KillNumShower.cs" />
     <Compile Include="Assets\tankio\Script\MapDB.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\BackButton.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\CalcTouchdown.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASAIGoalProvider.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASGoal.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASGoalUI.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASLocalMate.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASMateCenter.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASPlaceBornHandler.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASRemoteMate.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FFASScoreCalc.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\FakeAiSpawSetuper.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\MateDialog.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\FFAsurvive\MateRow.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\LevelComplate.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\LevelCompleter.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\LevelTarget.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Lobby\LvDeliverPoint.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Lobby\LvThreshold.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\MissionLevelDB.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\MissionManager.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\MissionUICanvas.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\ScoreCalc.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\ScoreCalcBasic.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\ScoreRankF.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\TankSwitcher.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\FinalStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutFireStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutMoveStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutReloadStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutSkillStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutSkillSwitchStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutZoomOutStep.cs" />
+    <Compile Include="Assets\tankio\Script\Mission\Tutorial\TutorialManager.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\AdRewardButton.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\ExpRewarder.cs" />
     <Compile Include="Assets\tankio\Script\Mobile\FailFireDetecter.cs" />
@@ -1627,10 +1662,10 @@
     <Compile Include="Assets\tankio\Script\Npc\AI\TargetSensor.cs" />
     <Compile Include="Assets\tankio\Script\Npc\AiDamgeDto.cs" />
     <Compile Include="Assets\tankio\Script\Npc\AiFakePlayer.cs" />
-    <Compile Include="Assets\tankio\Script\Npc\AiIdleNav.cs" />
     <Compile Include="Assets\tankio\Script\Npc\AiSpawer.cs" />
     <Compile Include="Assets\tankio\Script\Npc\CommRemoteAi.cs" />
     <Compile Include="Assets\tankio\Script\Npc\CreateAiDto.cs" />
+    <Compile Include="Assets\tankio\Script\Npc\FPSpawn.cs" />
     <Compile Include="Assets\tankio\Script\Npc\FakPlayerMoveDto.cs" />
     <Compile Include="Assets\tankio\Script\Npc\FakeAiInitDto.cs" />
     <Compile Include="Assets\tankio\Script\Npc\FakePlayerFireDto.cs" />
@@ -1660,9 +1695,11 @@
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\AttrTile.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\ChatView.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\LevelExpMonitor.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\PingAlert.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\SafetyExitAlert.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\ScoreUI.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Hud\WeaponUI.cs" />
+    <Compile Include="Assets\tankio\Script\PlayGameUi\IntoRoomList.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\Leaderboard.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\LoadingText.cs" />
     <Compile Include="Assets\tankio\Script\PlayGameUi\LocalPlayerOverlay.cs" />
@@ -1727,22 +1764,11 @@
     <Compile Include="Assets\tankio\Script\SettingIAP\SettingSoundButton.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\SettingsIAPManager.cs" />
     <Compile Include="Assets\tankio\Script\SettingIAP\TextureQualityer.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\BackButton.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\CalcTouchdown.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\LevelComplate.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\LevelCompleter.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\LevelTarget.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\MissionLevelDB.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\MissionManager.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\MissionUICanvas.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\ScoreCalc.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\ScoreCalcBasic.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\ScoreRankF.cs" />
-    <Compile Include="Assets\tankio\Script\SingleMission\TankSwitcher.cs" />
     <Compile Include="Assets\tankio\Script\TDSTK\ShootObjectCheckQueue.cs" />
     <Compile Include="Assets\tankio\Script\TDSTK\ShootRemoteCheckHited.cs" />
     <Compile Include="Assets\tankio\Script\Tank\IntoInvincibleTask.cs" />
     <Compile Include="Assets\tankio\Script\Tank\KillDethGetSet.cs" />
+    <Compile Include="Assets\tankio\Script\Tank\LocalSoulTasker.cs" />
     <Compile Include="Assets\tankio\Script\Tank\LocalTank.cs" />
     <Compile Include="Assets\tankio\Script\Tank\LocalTankFirePoster.cs" />
     <Compile Include="Assets\tankio\Script\Tank\LocalTankMovePoster.cs" />
@@ -1754,6 +1780,7 @@
     <Compile Include="Assets\tankio\Script\Tank\PlayerGouster.cs" />
     <Compile Include="Assets\tankio\Script\Tank\PlayerTrail.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RandomPlaceBorner.cs" />
+    <Compile Include="Assets\tankio\Script\Tank\RemoteSoulTasker.cs" />
     <Compile Include="Assets\tankio\Script\Tank\RemoteTank.cs" />
     <Compile Include="Assets\tankio\Script\Tank\TankAnimHandler.cs" />
     <Compile Include="Assets\tankio\Script\Tank\TankFireAnimHandler.cs" />
@@ -1802,9 +1829,11 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\FakePlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\Mobile\PVPMobileManager.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\Mobile\WarRecordButton.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRevivalHandler.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomData.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPRoomManager.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPStartDialog.cs" />
+    <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPTargetCenter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\PVPWinLoseBroadcastData.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\QueryFilter.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\PVP\TD\TowerSituation.cs" />
@@ -1815,7 +1844,6 @@
     <Compile Include="Assets\tankio\Script\TwoTeams\SelfPlayerTeam.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\SoulViewer.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TeamTankDto.cs" />
-    <Compile Include="Assets\tankio\Script\TwoTeams\TeamTarget.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\Teamer.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TwoTeamManager.cs" />
     <Compile Include="Assets\tankio\Script\TwoTeams\TwoTeamsPlaceBroner.cs" />
@@ -1844,6 +1872,7 @@
     <None Include="Assets\AngryDroids\Shaders\DroidHD.shader" />
     <None Include="Assets\AngryDroids\Shaders\LD\ColoredMaskSelfIllum.shader" />
     <None Include="Assets\AngryDroids\Shaders\SpawnEffect.shader" />
+    <None Include="Assets\Best HTTP (Pro)\BestHTTP\SecureProtocol\License.txt" />
     <None Include="Assets\Best HTTP (Pro)\ReleaseNotes.txt" />
     <None Include="Assets\Best HTTP (Pro)\link.xml" />
     <None Include="Assets\Best HTTP (Pro)\link_android_subset.xml" />
@@ -1862,6 +1891,7 @@
     <None Include="Assets\Mech_Constructor_Spiders\Models\X_Spiders_Big_Scene_Readme.txt" />
     <None Include="Assets\Odds_N_Ends Series - Tropical Foliage v1.0\READ ME.txt" />
     <None Include="Assets\Odds_N_Ends Series - Tropical Foliage v1.0\Shader\CustomFoliage.shader" />
+    <None Include="Assets\OfficalTank2\Shaders\Decal.shader" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\API.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />

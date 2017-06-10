@@ -55,9 +55,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -222,6 +219,7 @@
     <None Include="Assets\AngryDroids\Shaders\DroidHD.shader" />
     <None Include="Assets\AngryDroids\Shaders\LD\ColoredMaskSelfIllum.shader" />
     <None Include="Assets\AngryDroids\Shaders\SpawnEffect.shader" />
+    <None Include="Assets\Best HTTP (Pro)\BestHTTP\SecureProtocol\License.txt" />
     <None Include="Assets\Best HTTP (Pro)\ReleaseNotes.txt" />
     <None Include="Assets\Best HTTP (Pro)\link.xml" />
     <None Include="Assets\Best HTTP (Pro)\link_android_subset.xml" />
@@ -240,6 +238,7 @@
     <None Include="Assets\Mech_Constructor_Spiders\Models\X_Spiders_Big_Scene_Readme.txt" />
     <None Include="Assets\Odds_N_Ends Series - Tropical Foliage v1.0\READ ME.txt" />
     <None Include="Assets\Odds_N_Ends Series - Tropical Foliage v1.0\Shader\CustomFoliage.shader" />
+    <None Include="Assets\OfficalTank2\Shaders\Decal.shader" />
     <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\API.txt" />
     <None Include="Assets\Plugins\CodeStage\AntiCheatToolkit\Changelog.txt" />
