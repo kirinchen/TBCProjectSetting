@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 
 //
 // modified and adapted DLAA code based on Dmitry Andreev's
@@ -19,7 +21,7 @@ CGINCLUDE
 	uniform float4 _MainTex_TexelSize;
 
 	struct v2f {
-		float4 pos : SV_POSITION;
+		float4 pos : POSITION;
 		float2 uv : TEXCOORD0;
 	};
 	
@@ -278,7 +280,7 @@ CGINCLUDE
 
 	v2f vert( appdata_img v ) {
 		v2f o;
-		o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos (v.vertex);
 		
 		float2 uv = v.texcoord.xy;
 		o.uv.xy = uv;
@@ -286,15 +288,15 @@ CGINCLUDE
 		return o;
 	}
 
-	half4 fragFirst (v2f i) : SV_Target {		 	 	    
+	half4 fragFirst (v2f i) : COLOR {		 	 	    
 		return highPassPre (i.uv);
 	}
 	
-	half4 fragSecond (v2f i) : SV_Target {		 	 	    
+	half4 fragSecond (v2f i) : COLOR {		 	 	    
 	    return edgeDetectAndBlur( i.uv );
 	}
 
-	half4 fragThird (v2f i) : SV_Target {		 	 	    
+	half4 fragThird (v2f i) : COLOR {		 	 	    
 	    return edgeDetectAndBlurSharper( i.uv );
 	}
 			
@@ -303,37 +305,47 @@ ENDCG
 SubShader {
 	Pass {
 		ZTest Always Cull Off ZWrite Off
+		Fog { Mode off }
 	
 		CGPROGRAM
 	
 		#pragma vertex vert
 		#pragma fragment fragFirst
+		//#pragma fragmentoption ARB_precision_hint_fastest 
         #pragma exclude_renderers d3d11_9x
+        #pragma glsl
 		
 		ENDCG
 	}
 	
 	Pass {
 		ZTest Always Cull Off ZWrite Off
+		Fog { Mode off }
 	
 		CGPROGRAM
 	
 		#pragma vertex vert
 		#pragma fragment fragSecond
+		//#pragma fragmentoption ARB_precision_hint_fastest 
 		#pragma target 3.0
         #pragma exclude_renderers d3d11_9x
+        #pragma glsl
 		
 		ENDCG
 	}
 
 	Pass {
 		ZTest Always Cull Off ZWrite Off
+		Fog { Mode off }
 	
 		CGPROGRAM
 	
 		#pragma vertex vert
 		#pragma fragment fragThird
+		//#pragma fragmentoption ARB_precision_hint_fastest 
 		#pragma target 3.0
+        #pragma exclude_renderers d3d11_9x
+        #pragma glsl
 		
 		ENDCG
 	}	

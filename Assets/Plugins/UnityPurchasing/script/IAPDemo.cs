@@ -3,8 +3,10 @@
 // before receipt validation will compile in this sample.
 // #define RECEIPT_VALIDATION
 #endif
+//#define DELAY_CONFIRMATION // Returns PurchaseProcessingResult.Pending from ProcessPurchase, then calls ConfirmPendingPurchase after a delay
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -26,13 +28,24 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 	// Unity IAP objects 
 	private IStoreController m_Controller;
 	private IAppleExtensions m_AppleExtensions;
+	private IMoolahExtension m_MoolahExtensions;
 	private ISamsungAppsExtensions m_SamsungExtensions;
+	private IMicrosoftExtensions m_MicrosoftExtensions;
+
+	#pragma warning disable 0414
+	private bool m_IsGooglePlayStoreSelected;
+	#pragma warning restore 0414
+	private bool m_IsSamsungAppsStoreSelected;
+	private bool m_IsCloudMoolahStoreSelected; 
+
+	private string m_LastTransationID;
+	private string m_LastReceipt;
+	private string m_CloudMoolahUserName;
+	private bool m_IsLoggedIn = false;
 
 	private int m_SelectedItemIndex = -1; // -1 == no product
 	private bool m_PurchaseInProgress;
-
 	private Selectable m_InteractableSelectable; // Optimization used for UI state management
-	private bool m_IsSamsungAppsStoreSelected;
 
 	#if RECEIPT_VALIDATION
 	private CrossPlatformValidator validator;
@@ -46,6 +59,8 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		m_Controller = controller;
 		m_AppleExtensions = extensions.GetExtension<IAppleExtensions> ();
 		m_SamsungExtensions = extensions.GetExtension<ISamsungAppsExtensions> ();
+		m_MoolahExtensions = extensions.GetExtension<IMoolahExtension> ();
+		m_MicrosoftExtensions = extensions.GetExtension<IMicrosoftExtensions> ();
 
 		InitUI(controller.products.all);
 
@@ -82,7 +97,7 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		for (int t = 0; t < m_Controller.products.all.Length; t++)
 		{
 			var item = m_Controller.products.all[t];
-			var description = string.Format("{0} - {1}", item.metadata.localizedTitle, item.metadata.localizedPriceString);
+			var description = string.Format("{0} | {1} => {2}", item.metadata.localizedTitle, item.metadata.localizedPriceString, item.metadata.localizedPrice);
 
 			// NOTE: my options list is created in InitUI
 			GetDropdown().options[t] = new Dropdown.OptionData(description);
@@ -93,6 +108,8 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 
 		// Now that I have real products, begin showing product purchase history
 		UpdateHistoryUI();
+
+		LogProductDefinitions();
 	}
 
 	/// <summary>
@@ -103,15 +120,16 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		Debug.Log("Purchase OK: " + e.purchasedProduct.definition.id);
 		Debug.Log("Receipt: " + e.purchasedProduct.receipt);
 
+		m_LastTransationID = e.purchasedProduct.transactionID;
+		m_LastReceipt = e.purchasedProduct.receipt;
 		m_PurchaseInProgress = false;
 
-		// Now that my purchase history has changed, update its UI
-		UpdateHistoryUI();
-
 		#if RECEIPT_VALIDATION
-		if (Application.platform == RuntimePlatform.Android ||
+		// Local validation is available for GooglePlay and Apple stores
+		if (m_IsGooglePlayStoreSelected ||
 			Application.platform == RuntimePlatform.IPhonePlayer ||
-			Application.platform == RuntimePlatform.OSXPlayer) {
+			Application.platform == RuntimePlatform.OSXPlayer ||
+			Application.platform == RuntimePlatform.tvOS) {
 			try {
 				var result = validator.Validate(e.purchasedProduct.receipt);
 				Debug.Log("Receipt is valid. Contents:");
@@ -141,11 +159,63 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		}
 		#endif
 
+		// CloudMoolah purchase completion / finishing currently requires using the API 
+		// extension IMoolahExtension.RequestPayout to finish a transaction.
+		if (m_IsCloudMoolahStoreSelected)
+		{
+			// Finish transaction with CloudMoolah server
+			m_MoolahExtensions.RequestPayOut(e.purchasedProduct.transactionID, 
+				(string transactionID, RequestPayOutState state, string message) => {
+					if (state == RequestPayOutState.RequestPayOutSucceed) {
+						// Finally, finish transaction with Unity IAP's local
+						// transaction log, recording the transaction id there
+						m_Controller.ConfirmPendingPurchase(e.purchasedProduct);
+
+						// Unlock content here.
+					} else {
+						Debug.Log("RequestPayOut: failed. transactionID: " + transactionID + 
+							", state: " + state + ", message: " + message);
+						// Finishing failed. Retry later.
+					}
+			});
+		}
+
 		// You should unlock the content here.
 
-		// Indicate we have handled this purchase, we will not be informed of it again.x
+		// Indicate if we have handled this purchase. 
+		//   PurchaseProcessingResult.Complete: ProcessPurchase will not be called
+		//     with this product again, until next purchase.
+		//   PurchaseProcessingResult.Pending: ProcessPurchase will be called 
+		//     again with this product at next app launch. Later, call 
+		//     m_Controller.ConfirmPendingPurchase(Product) to complete handling
+		//     this purchase. Use to transactionally save purchases to a cloud
+		//     game service. 
+#if DELAY_CONFIRMATION
+		StartCoroutine(ConfirmPendingPurchaseAfterDelay(e.purchasedProduct));
+		return PurchaseProcessingResult.Pending;
+#else
+		UpdateHistoryUI();
 		return PurchaseProcessingResult.Complete;
+#endif
 	}
+
+#if DELAY_CONFIRMATION
+	private HashSet<string> m_PendingProducts = new HashSet<string>();
+
+	private IEnumerator ConfirmPendingPurchaseAfterDelay(Product p)
+	{
+		m_PendingProducts.Add(p.definition.id);
+		Debug.Log("Delaying confirmation of " + p.definition.id + " for 5 seconds.");
+		UpdateHistoryUI();
+
+		yield return new WaitForSeconds(5f);
+
+		Debug.Log("Confirming purchase of " + p.definition.id);
+		m_Controller.ConfirmPendingPurchase(p);
+		m_PendingProducts.Remove(p.definition.id);
+		UpdateHistoryUI();
+	}
+#endif
 
 	/// <summary>
 	/// This will be called is an attempted purchase fails.
@@ -187,9 +257,26 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		module.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
 
 		var builder = ConfigurationBuilder.Instance(module);
+
 		// This enables the Microsoft IAP simulator for local testing.
 		// You would remove this before building your release package.
 		builder.Configure<IMicrosoftConfiguration>().useMockBillingSystem = true;
+		builder.Configure<IGooglePlayConfiguration>().SetPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2O/9/H7jYjOsLFT/uSy3ZEk5KaNg1xx60RN7yWJaoQZ7qMeLy4hsVB3IpgMXgiYFiKELkBaUEkObiPDlCxcHnWVlhnzJBvTfeCPrYNVOOSJFZrXdotp5L0iS2NVHjnllM+HA1M0W2eSNjdYzdLmZl1bxTpXa4th+dVli9lZu7B7C2ly79i/hGTmvaClzPBNyX+Rtj7Bmo336zh2lYbRdpD5glozUq+10u91PMDPH+jqhx10eyZpiapr8dFqXl5diMiobknw9CgcjxqMTVBQHK6hS0qYKPmUDONquJn280fBs1PTeA6NMG03gb9FLESKFclcuEZtvM8ZwMMRxSLA9GwIDAQAB");
+		m_IsGooglePlayStoreSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.GooglePlay;
+
+		// CloudMoolah Configuration setings 
+		// All games must set the configuration. the configuration need to apply on the CloudMoolah Portal.
+		// CloudMoolah APP Key
+		builder.Configure<IMoolahConfiguration>().appKey = "d93f4564c41d463ed3d3cd207594ee1b";
+		// CloudMoolah Hash Key
+		builder.Configure<IMoolahConfiguration>().hashKey = "cc";
+		// This enables the CloudMoolah test mode for local testing.
+		// You would remove this, or set to CloudMoolahMode.Production, before building your release package.
+		builder.Configure<IMoolahConfiguration>().SetMode(CloudMoolahMode.AlwaysSucceed);
+		// This records whether we are using Cloud Moolah IAP. 
+		// Cloud Moolah requires logging in to access your Digital Wallet, so: 
+		// A) IAPDemo (this) displays the Cloud Moolah GUI button for Cloud Moolah
+		m_IsCloudMoolahStoreSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.CloudMoolah;
 
 		// Define our products.
 		// In this case our products have the same identifier across all the App stores,
@@ -201,28 +288,27 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		{
 			{"100.gold.coins.mac", MacAppStore.Name},
 			{"000000596586", TizenStore.Name},
-
+			{"com.ff", MoolahAppStore.Name},
 		});
 
 		builder.AddProduct("500.gold.coins", ProductType.Consumable, new IDs
 		{
 			{"500.gold.coins.mac", MacAppStore.Name},
 			{"000000596581", TizenStore.Name},
-
+			{"com.ee", MoolahAppStore.Name},
 		});
 
 		builder.AddProduct("sword", ProductType.NonConsumable, new IDs
 		{
 			{"sword.mac", MacAppStore.Name},
 			{"000000596583", TizenStore.Name},
-
 		});
 
 		builder.AddProduct("subscription", ProductType.Subscription, new IDs
 		{
 			{"subscription.mac", MacAppStore.Name}
 		});
-
+		
 		// Write Amazon's JSON description of our products to storage when using Amazon's local sandbox.
 		// This should be removed from a production build.
 		builder.Configure<IAmazonConfiguration>().WriteSandboxJSON(builder.products);
@@ -234,7 +320,7 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		// displays a blocking Android Activity, so: 
 		// A) Unity IAP does not automatically restore purchases on Samsung Galaxy Apps
 		// B) IAPDemo (this) displays the "Restore" GUI button for Samsung Galaxy Apps
-		m_IsSamsungAppsStoreSelected = module.androidStore == AndroidStore.SamsungApps;
+		m_IsSamsungAppsStoreSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.SamsungApps;
 
 
 		// This selects the GroupId that was created in the Tizen Store for this set of products
@@ -243,7 +329,13 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 
 
 		#if RECEIPT_VALIDATION
-		validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.bundleIdentifier);
+		string appIdentifier;
+		#if UNITY_5_6_OR_NEWER
+		appIdentifier = Application.identifier;
+		#else
+		appIdentifier = Application.bundleIdentifier;
+		#endif
+		validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), appIdentifier);
 		#endif
 
 		// Now we're ready to initialize Unity IAP.
@@ -279,13 +371,22 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		// See also UpdateInteractable()
 		m_InteractableSelectable = GetDropdown(); // References any one of the disabled components
 
-		// Show Restore button on Apple platforms
-		if (! (Application.platform == RuntimePlatform.IPhonePlayer || 
+		// Show Restore button on supported platforms
+		if (! (Application.platform == RuntimePlatform.IPhonePlayer ||
 			   Application.platform == RuntimePlatform.OSXPlayer ||
-			   m_IsSamsungAppsStoreSelected ) )
+			   Application.platform == RuntimePlatform.tvOS || 
+			   Application.platform == RuntimePlatform.WSAPlayerX86 ||
+			   Application.platform == RuntimePlatform.WSAPlayerX64 ||
+			   Application.platform == RuntimePlatform.WSAPlayerARM ||
+			m_IsSamsungAppsStoreSelected  || m_IsCloudMoolahStoreSelected) )
 		{
 			GetRestoreButton().gameObject.SetActive(false);
 		}
+
+		// Show Register, Login, and Validate buttons on CloudMoolah platform
+		GetRegisterButton().gameObject.SetActive(m_IsCloudMoolahStoreSelected);
+		GetLoginButton().gameObject.SetActive(m_IsCloudMoolahStoreSelected);
+		GetValidateButton().gameObject.SetActive(m_IsCloudMoolahStoreSelected);
 
 		foreach (var item in items)
 		{
@@ -306,24 +407,54 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		// Initialize my button event handling
 		GetBuyButton().onClick.AddListener(() => { 
 			if (m_PurchaseInProgress == true) {
+				Debug.Log("Please wait, purchasing ...");
 				return;
 			}
 
-			m_Controller.InitiatePurchase(m_Controller.products.all[m_SelectedItemIndex]); 
+			// For CloudMoolah, games utilizing a connected backend game server may wish to login.
+			// Standalone games may not need to login.
+			if (m_IsCloudMoolahStoreSelected && m_IsLoggedIn == false)
+			{
+				Debug.LogWarning("CloudMoolah purchase notifications will not be forwarded server-to-server. Login incomplete.");
+			}
 
 			// Don't need to draw our UI whilst a purchase is in progress.
 			// This is not a requirement for IAP Applications but makes the demo
 			// scene tidier whilst the fake purchase dialog is showing.
 			m_PurchaseInProgress = true;
+			m_Controller.InitiatePurchase(m_Controller.products.all[m_SelectedItemIndex], "aDemoDeveloperPayload"); 
 		});
 
 		if (GetRestoreButton() != null)
 		{
-			GetRestoreButton().onClick.AddListener(() =>
-			{ 
-				if (m_IsSamsungAppsStoreSelected)
+			GetRestoreButton().onClick.AddListener(() => {
+				if (m_IsCloudMoolahStoreSelected)
+				{
+					if (m_IsLoggedIn == false)
+					{
+						Debug.LogError("CloudMoolah purchase restoration aborted. Login incomplete.");
+					}
+					else
+					{
+						// Restore abnornal transaction identifer, if Client don't receive transaction identifer.
+						m_MoolahExtensions.RestoreTransactionID((RestoreTransactionIDState restoreTransactionIDState) => {
+							Debug.Log("restoreTransactionIDState = " + restoreTransactionIDState.ToString());
+							bool success = 
+								restoreTransactionIDState != RestoreTransactionIDState.RestoreFailed &&
+								restoreTransactionIDState != RestoreTransactionIDState.NotKnown;
+                            OnTransactionsRestored(success);
+						});
+					}
+				}
+				else if (m_IsSamsungAppsStoreSelected)
 				{
 					m_SamsungExtensions.RestoreTransactions(OnTransactionsRestored);
+				}
+				else if (Application.platform == RuntimePlatform.WSAPlayerX86 ||
+						 Application.platform == RuntimePlatform.WSAPlayerX64 ||
+						 Application.platform == RuntimePlatform.WSAPlayerARM)
+				{
+					m_MicrosoftExtensions.RestoreTransactions();
 				}
 				else
 				{
@@ -331,6 +462,69 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 				}
 			});
 		}
+
+		// CloudMoolah requires user registration and supports login to manage the user's
+		// digital wallet. The CM store also supports remote receipt validation.
+
+		// CloudMoolah user registration extension, to establish digital wallet
+		// This is a "fast" registration, requiring only a password. Users may provide 
+		// more detail including an email address during the purchase flow, a "slow" registration, if desired. 
+		if (GetRegisterButton() != null)
+		{
+			GetRegisterButton().onClick.AddListener (() => {
+				// Provide a unique password to establish the user's account.
+				// Typically, connected games (with backend game servers), may already
+				// have available a user-token, which could be supplied here.
+				m_MoolahExtensions.FastRegister("CMPassword", RegisterSucceeded, RegisterFailed);
+			});
+		}
+
+		// CloudMoolah user login extension, to access existing digital wallet
+		if (GetLoginButton() != null)
+		{
+			GetLoginButton().onClick.AddListener (() => {
+				m_MoolahExtensions.Login(m_CloudMoolahUserName, "CMPassword", LoginResult);
+			});
+		}
+
+		// CloudMoolah remote purchase receipt validation, to determine if the purchase is fraudulent 
+		// NOTE: Remote validation only available for CloudMoolah currently. For local validation, 
+		// see ProcessPurchase.
+		if (GetValidateButton() != null)
+		{
+			GetValidateButton ().onClick.AddListener (() => {
+				// Remotely validate the last transaction and receipt.
+				m_MoolahExtensions.ValidateReceipt(m_LastTransationID, m_LastReceipt, 
+					(string transactionID, ValidateReceiptState state, string message) => {
+						Debug.Log("ValidtateReceipt transactionID:" + transactionID 
+							+ ", state:" + state.ToString() + ", message:" + message);
+				});
+			});
+		}
+	}
+
+	public void LoginResult (LoginResultState state, string errorMsg)
+	{
+		if(state == LoginResultState.LoginSucceed)
+		{
+			m_IsLoggedIn = true;
+		}
+		else
+		{
+			m_IsLoggedIn = false;
+		}	
+		Debug.Log ("LoginResult: state: " + state.ToString () + " errorMsg: " + errorMsg);
+	}
+
+	public void RegisterSucceeded(string cmUserName)
+	{
+		Debug.Log ("RegisterSucceeded: cmUserName = " + cmUserName);
+		m_CloudMoolahUserName = cmUserName;
+	}
+
+	public void RegisterFailed (FastRegisterError error, string errorMessage)
+	{
+		Debug.Log ("RegisterFailed: error = " + error.ToString() + ", errorMessage = " + errorMessage);
 	}
 
 	public void UpdateHistoryUI()
@@ -343,14 +537,15 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		var itemText = "Item\n\n";
 		var countText = "Purchased\n\n";
 
-		for (int t = 0; t < m_Controller.products.all.Length; t++)
-		{
-			var item = m_Controller.products.all [t];
-
+		foreach (var item in m_Controller.products.all) {
 			// Collect history status report
-
 			itemText += "\n\n" + item.definition.id;
-			countText += "\n\n" + item.hasReceipt.ToString();
+			countText += "\n\n";
+#if DELAY_CONFIRMATION
+			if (m_PendingProducts.Contains(item.definition.id))
+				countText += "(Pending) ";
+#endif
+			countText += item.hasReceipt.ToString();
 		}
 
 		// Show history
@@ -374,6 +569,8 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 			}
 			GetBuyButton().interactable = interactable;
 			GetDropdown().interactable = interactable;
+			GetRegisterButton().interactable = interactable;
+			GetLoginButton().interactable = interactable;
 		}
 	}
 
@@ -398,10 +595,30 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 	/// <returns><c>null</c> or the restore button.</returns>
 	private Button GetRestoreButton()
 	{
-		GameObject restoreButtonGameObject = GameObject.Find("Restore");
-		if (restoreButtonGameObject != null)
+		return GetButton ("Restore");
+	}
+
+	private Button GetRegisterButton()
+	{
+		return GetButton ("Register");
+	}
+
+	private Button GetLoginButton()
+	{
+		return GetButton ("Login");
+	}
+
+	private Button GetValidateButton()
+	{
+		return GetButton ("Validate");
+	}
+
+	private  Button GetButton(string buttonName)
+	{
+		GameObject obj = GameObject.Find(buttonName);
+		if (obj != null)
 		{
-			return restoreButtonGameObject.GetComponent<Button>();
+			return obj.GetComponent <Button>();
 		}
 		else
 		{
@@ -413,5 +630,17 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 	{
 		var which = right ? "TextR" : "TextL";
 		return GameObject.Find(which).GetComponent<Text>();
+	}
+
+	private void LogProductDefinitions()
+	{
+		var products = m_Controller.products.all;
+		foreach (var product in products) {
+#if UNITY_5_6_OR_NEWER
+			Debug.Log(string.Format("id: {0}\nstore-specific id: {1}\ntype: {2}\nenabled: {3}\n", product.definition.id, product.definition.storeSpecificId, product.definition.type.ToString(), product.definition.enabled ? "enabled" : "disabled"));
+#else
+			Debug.Log(string.Format("id: {0}\nstore-specific id: {1}\ntype: {2}\n", product.definition.id, product.definition.storeSpecificId, product.definition.type.ToString()));
+#endif
+		}
 	}
 }

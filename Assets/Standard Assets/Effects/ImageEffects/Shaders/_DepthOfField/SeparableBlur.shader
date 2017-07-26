@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/SeparableBlur" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "" {}
@@ -8,7 +10,7 @@ Shader "Hidden/SeparableBlur" {
 	#include "UnityCG.cginc"
 	
 	struct v2f {
-		float4 pos : SV_POSITION;
+		float4 pos : POSITION;
 		float2 uv : TEXCOORD0;
 
 		float4 uv01 : TEXCOORD1;
@@ -22,7 +24,7 @@ Shader "Hidden/SeparableBlur" {
 		
 	v2f vert (appdata_img v) {
 		v2f o;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 
 		o.uv.xy = v.texcoord.xy;
 
@@ -33,7 +35,7 @@ Shader "Hidden/SeparableBlur" {
 		return o;  
 	}
 		
-	half4 frag (v2f i) : SV_Target {
+	half4 frag (v2f i) : COLOR {
 		half4 color = float4 (0,0,0,0);
 
 		color += 0.40 * tex2D (_MainTex, i.uv);
@@ -52,8 +54,10 @@ Shader "Hidden/SeparableBlur" {
 Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment frag
       ENDCG

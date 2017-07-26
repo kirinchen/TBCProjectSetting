@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/SeparableWeightedBlurDof34" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "" {}
@@ -16,7 +18,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 	sampler2D _TapHigh;
 		
 	struct v2f {
-		half4 pos : SV_POSITION;
+		half4 pos : POSITION;
 		half2 uv : TEXCOORD0;
 		half4 uv01 : TEXCOORD1;
 		half4 uv23 : TEXCOORD2;
@@ -24,7 +26,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 	};
 	
 	struct v2fSingle {
-		half4 pos : SV_POSITION;
+		half4 pos : POSITION;
 		half2 uv : TEXCOORD0;
 	};
 	
@@ -34,7 +36,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 	
 	v2f vert (appdata_img v) {
 		v2f o;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv.xy = v.texcoord.xy;
 		o.uv01 =  v.texcoord.xyxy + offsets.xyxy * half4(1,1, -1,-1);
 		o.uv23 =  v.texcoord.xyxy + offsets.xyxy * half4(1,1, -1,-1) * 2.0;
@@ -45,7 +47,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 	
 	v2fSingle vertSingleTex (appdata_img v) {
 		v2fSingle o;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv.xy = v.texcoord.xy;
 		return o;  
 	}	
@@ -56,7 +58,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 		
 	// mostly used for foreground, so more gaussian-like
 			
-	half4 fragBlurUnweighted (v2f i) : SV_Target {
+	half4 fragBlurUnweighted (v2f i) : COLOR {
 		half4 blurredColor = half4 (0,0,0,0);
 
 		half4 sampleA = tex2D(_MainTex, i.uv.xy);
@@ -80,7 +82,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 
 	// used for background, so more bone curve-like
 		
-	half4 fragBlurWeighted (v2f i) : SV_Target {
+	half4 fragBlurWeighted (v2f i) : COLOR {
 		half4 blurredColor = half4 (0,0,0,0);
 
 		half4 sampleA = tex2D(_MainTex, i.uv.xy);
@@ -111,7 +113,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 		return color;
 	}
 	
-	half4 fragBlurDark (v2f i) : SV_Target {
+	half4 fragBlurDark (v2f i) : COLOR {
 		half4 blurredColor = half4 (0,0,0,0);
 
 		half4 sampleA = tex2D(_MainTex, i.uv.xy);
@@ -144,7 +146,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 		
 	// not used atm
 	
-	half4 fragBlurUnweightedDark (v2f i) : SV_Target {
+	half4 fragBlurUnweightedDark (v2f i) : COLOR {
 		half4 blurredColor = half4 (0,0,0,0);
 
 		half4 sampleA = tex2D(_MainTex, i.uv.xy);
@@ -173,7 +175,7 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 	sampler2D _TapMedium;
 	sampler2D _TapLow;
 	
-	half4 fragMixMediumAndLowTap (v2fSingle i) : SV_Target 
+	half4 fragMixMediumAndLowTap (v2fSingle i) : COLOR 
 	{
 	 	half4 tapMedium = tex2D (_TapMedium, i.uv.xy);
 		half4 tapLow = tex2D (_TapLow, i.uv.xy);
@@ -187,11 +189,13 @@ Shader "Hidden/SeparableWeightedBlurDof34" {
 	
 Subshader {
 	ZTest Always Cull Off ZWrite Off
+	Fog { Mode off }  
 	  	
   Pass {     
       
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragBlurWeighted
       
@@ -200,6 +204,7 @@ Subshader {
   Pass {   
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragBlurUnweighted
       
@@ -211,6 +216,7 @@ Subshader {
   Pass {    
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragBlurUnweightedDark
       
@@ -219,6 +225,7 @@ Subshader {
   Pass {    
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vertSingleTex
       #pragma fragment fragMixMediumAndLowTap
       
@@ -230,6 +237,7 @@ Subshader {
   Pass {    
       CGPROGRAM
       
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment fragBlurDark
       

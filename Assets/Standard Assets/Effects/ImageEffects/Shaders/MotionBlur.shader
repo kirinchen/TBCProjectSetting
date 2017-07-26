@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/MotionBlur" {
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "white" {}
@@ -6,6 +8,7 @@ Properties {
 
     SubShader { 
 		ZTest Always Cull Off ZWrite Off
+		Fog { Mode off }
 		Pass {
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMask RGB
@@ -17,6 +20,7 @@ Properties {
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma fragmentoption ARB_precision_hint_fastest
 	
 			#include "UnityCG.cginc"
 	
@@ -26,7 +30,7 @@ Properties {
 			};
 	
 			struct v2f {
-				float4 vertex : SV_POSITION;
+				float4 vertex : POSITION;
 				float2 texcoord : TEXCOORD;
 			};
 			
@@ -36,14 +40,14 @@ Properties {
 			v2f vert (appdata_t v)
 			{
 				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 				return o;
 			}
 	
 			sampler2D _MainTex;
 			
-			half4 frag (v2f i) : SV_Target
+			half4 frag (v2f i) : COLOR
 			{
 				return half4(tex2D(_MainTex, i.texcoord).rgb, _AccumOrig );
 			}
@@ -62,6 +66,7 @@ Properties {
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma fragmentoption ARB_precision_hint_fastest
 	
 			#include "UnityCG.cginc"
 	
@@ -71,7 +76,7 @@ Properties {
 			};
 	
 			struct v2f {
-				float4 vertex : SV_POSITION;
+				float4 vertex : POSITION;
 				float2 texcoord : TEXCOORD;
 			};
 			
@@ -80,14 +85,14 @@ Properties {
 			v2f vert (appdata_t v)
 			{
 				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 				return o;
 			}
 	
 			sampler2D _MainTex;
 			
-			half4 frag (v2f i) : SV_Target
+			half4 frag (v2f i) : COLOR
 			{
 				return tex2D(_MainTex, i.texcoord);
 			}
@@ -98,6 +103,7 @@ Properties {
 
 SubShader {
 	ZTest Always Cull Off ZWrite Off
+	Fog { Mode off }
 	Pass {
 		Blend SrcAlpha OneMinusSrcAlpha
 		ColorMask RGB

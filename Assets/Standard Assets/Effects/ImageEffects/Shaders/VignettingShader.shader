@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/Vignetting" {
 	Properties {
 		_MainTex ("Base", 2D) = "white" {}
@@ -9,7 +11,7 @@ Shader "Hidden/Vignetting" {
 	#include "UnityCG.cginc"
 	
 	struct v2f {
-		float4 pos : SV_POSITION;
+		float4 pos : POSITION;
 		float2 uv : TEXCOORD0;
 		float2 uv2 : TEXCOORD1;
 	};
@@ -24,7 +26,7 @@ Shader "Hidden/Vignetting" {
 		
 	v2f vert( appdata_img v ) {
 		v2f o;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = v.texcoord.xy;
 		o.uv2 = v.texcoord.xy;
 
@@ -36,7 +38,7 @@ Shader "Hidden/Vignetting" {
 		return o;
 	} 
 	
-	half4 frag(v2f i) : SV_Target {
+	half4 frag(v2f i) : COLOR {
 		half2 coords = i.uv;
 		half2 uv = i.uv;
 		
@@ -57,8 +59,10 @@ Shader "Hidden/Vignetting" {
 Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma fragmentoption ARB_precision_hint_fastest 
       #pragma vertex vert
       #pragma fragment frag
       ENDCG

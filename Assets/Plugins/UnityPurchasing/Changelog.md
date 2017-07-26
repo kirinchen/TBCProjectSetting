@@ -1,7 +1,123 @@
+## [1.11.4] - 2017-06-21
+### Fixed
+- Apple platforms - Fix a blocking bug when building from Unity 5.3.
+
+## [1.11.3] - 2017-06-20
+### Fixed
+- Amazon - Purchase attempts for owned non-consumable products are now treated as successful purchases.
+
+## [1.11.2] - 2017-05-30
+### Added
+- Apple platforms - Parse the app receipt when retrieving product information and attempt to set receipt fields on Product. With this change the hasReceipt field on Apple platforms will work more like it does on non-Apple platforms.
+
+### Fixed
+- FacebookStore - Better error handling for cases where store configuration changes after purchases have already been made.
+- General - Better momentary memory performance for local receipt validation and other JSON parsing situations.
+- Editor menus - Targeted Android store menu checkmark are set and valid more often.
+- Installer - Fix error seen during install, `ReflectionTypeLoadException[...]UnityEditor.Purchasing.UnityIAPInstaller.<k_Purchasing>`.
+
+
+## [1.11.1] - 2017-05-23
+### Fixed
+- GooglePlay - Fix regression seen during purchasing where GooglePlay Activity forces screen orientation to portrait and turns background black. Restores neutral orientation and transparent background behavior.
+
+## [1.11.0] - 2017-05-01
+### Added
+- FacebookStore - Facebook Gameroom Payments Lite support. Available on Unity 5.6+ when building for Facebook Platform on Gameroom (Windows) and WebGL. Preliminary documentation is available [here](https://docs.google.com/document/d/1FaYwKvdnMHxkh47YVuXx9dMbc6ZtLX53mtgyAIn6WfU/)
+- Apple platforms - Added experimental support for setting "simulatesAskToBuyInSandbox". Please let us know how this impacts ask-to-buy testability for you.
+```csharp
+extensions.GetExtension<IAppleExtensions>().simulateAskToBuy = true;
+```
+- Apple platforms - Added support for setting "applicationUsername" field which will be added to every payment request to help the store detect fraud.
+```csharp
+// Set the applicationUsername to help Apple detect fraud
+extensions.GetExtension<IAppleExtensions>().SetApplicationUsername(hashedUsername);
+```
+
+### Requirement
+- GooglePlay - "Android SDK API Level 24 (7.0)" (or higher) must now be installed. To upgrade, either perform the one-time step of setting the project's "Android Player Settings > Other Settings > Minimum API Level" to 24, building an APK, then resetting to the project's previous value. Or, run the `android` Android SDK Manager tool manually and install "Android 7.0 (API 24)". Addresses build error messages: "Unable to merge android manifests." and "Main manifest has \<uses-sdk android:targetSdkVersion='23'> but library uses targetSdkVersion='24'". Note the Minimum API Level support is unchanged; merely the installation of API 24 SDK is now required for Daydream VR.
+
+### Fixed
+- GooglePlay Daydream VR - Uses decoration-free Activity for purchasing
+- GooglePlay - Avoids sporadic price serialization exception
+- Apple App Stores - Improve handling of the situation where an attempt to finish a transaction fails (if the user is signed out of the store and cancels the sign in dialog, for example). The Apple store implementation will now remember that the transaction should be finished, and attempt to call finishTransaction again if the transaction is retrieved from the queue again. When this happens, the store will call OnPurchaseFailed with the reason "DuplicateTransaction"—this prevents a situation where a call to InitiatePurchase could result in no call to ProcessPurchase or OnPurchaseFailed.
+- Amazon - Fix for a crash when loading product metadata for subscription parent products
+
+## [1.10.1] - 2017-03-29
+### Fixed
+- GooglePlay - Suspending and resuming from app-icon while purchase dialog displayed no longer generates both OnPurchaseFailed then ProcessPurchase messages, only whichever callback is correct.
+- Remove cloud JSON exporter that was erroneously showing in the IAP Catalog export list
+- Fixed a bug when parsing localized prices when the device's localization does not match the number format rules for the currency
+- Resolved DLL name conflict by renaming Assets/Plugins/UnityPurchasing/Bin/Common.dll to Purchasing.Common.dll
+- Installer - Suppressed multiple redundant dialogs
+
+## [1.10.0] - 2017-01-23
+### Added
+- Samsung Galaxy Apps - In-App Purchase SDK v4. Simplifies flow for first-time payment users. See [Samsung Developer IAP Documentation](http://developer.samsung.com/iap) for more.
+- Tizen Store - Add support for subscriptions
+- StandardPurchasingModule - Add `bool useFakeStoreAlways` property to override native stores with the local debug FakeStore for rapid prototyping. Will not connect to any App Store when enabled.
+
+```csharp
+// Enable the FakeStore for all IAP activity
+var module = StandardPurchasingModule.Instance();
+module.useFakeStoreAlways = true;
+```
+
+* Editor Updater - Notify the developer when updates to Unity IAP are available with an actionable dialog. Periodically check the Asset Store version and prompt with an upgrade dialog capable of downloading the latest plugin.
+* Editor Installer - Simplify integration of Unity IAP into a Project, avoiding unexpected breakage of the scripting build environment after package installation. Detect and warn if Unity IAP Core Service is "Off" during installation.
+
+### Removed
+- Samsung Galaxy Apps - remove In-App Purchase SDK v3 and replaced with v4, above.
+
+### Fixed
+- GooglePlay - Fix a problem that occurred when suspending the application during a successful transaction. Previously a consumable product could get stuck in a state where it could not be purchased again until the Google Play cache was cleared.
+
+## [1.9.3] - 2017-01-03
+### Added
+- Windows Store - support for UWP apps running while logged-out of Windows Store. Now fetches app's product metadata if logged out, and requests user sign in to make purchase or to fetch user's purchase history.
+- Editor - diagnostic log at build-time when IAP Service disabled: "Unity IAP plugin is installed, but Unity IAP is not enabled. Please enable Unity IAP in the Services window." Fewer redundant errors.
+
+### Fixed
+- Editor - checkmarks refresh for Targeted Android Store after Editor Play/Stop
+- Editor - hides spurious Component MenuItems
+- Linux Editor - BillingMode.json path case-sensitivity 
+- IAP Catalog - clearer text for Export button: "App Store Export"
+
+## [1.9.2] - 2016-11-29
+### Fixed
+- GooglePlay - addresses warning about usage of WebViewClient.onReceivedSslError if CloudMoolah.aar is included
+- CloudMoolah - simplify Login API and rename LoginError enum to LoginResultState
+- Android - remove READ_PHONE_STATE permission from AndroidManifest.xml simplifying logic around CloudMoolah Register and Login by removing automatic SystemInfo.deviceUniqueIdentifier calls. Developers may now choose to include this permission using this API to collect a user identifer, or provide an alternate long-lived user identifier, in a CloudMoolah supporting game for the Register and Login API password parameter.
+
+## [1.9.1] - 2016-11-17
+### Added
+- [Beta] Codeless IAP — UI fields show title, price, and description downloaded from the platform store
+- IAP Catalog now includes a store ID field for the CloudMoolah store
+
+### Fixed
+- IAPButton component now updates product ID list as the IAP Catalog is being edited
+- Fixed a problem with opening a project containing the Unity IAP plugin while IAP was disabled in the Services window
+- IAPButton inspector field for Product ID now works correctly with Undo
+- Set GooglePlay as default Android store AAR fileset. Excludes other store's assets (Java, resource XML, localization), saving ~196kb in default APK. Creates Assets/Plugins/UnityPurchasing/Resources/BillingMode.json in Project. Configure manually with Window > Unity IAP > Android menu, or UnityPurchasingEditor.TargetAndroidStore(AndroidStore).
+- CloudMoolah - update Window > Unity IAP > Android menu checkmarks when CloudMoolah selected
+
+## [1.9.0] - 2016-10-31
+### Added
+- CloudMoolah support. CloudMoolah website [here](http://www.cloudmoolah.com). Preliminary store guide available [here](https://docs.google.com/document/d/1T9CEZe6eNCwgWkq7lLwrEw7rpSbu3_EjcUVgJJL6xA0/edit). Preliminary configuration document available [here](https://docs.google.com/document/d/1dpc3zqsyROeFUVBy9W9pc0sskCPyfhcRnsGxtyITmyQ/edit).
+- [Beta] Codeless IAP tools. Implement IAP by adding IAP Buttons to your project (Window > Unity IAP > Create IAP Button) and configure your catalog of IAP products without writing a line of code (Window > Unity IAP > IAP Catalog). Preliminary documentation is available [here](https://docs.google.com/document/d/1597oxEI1UkZ1164j1lR7s-2YIrJyidbrfNwTfSI1Ksc/edit).
+- [Beta] Google Play - Support for Daydream VR. Requires Unity 5.4+ "GVR" Technical Preview, enabling VR, and including the Daydream SDK. Additional details [here](https://unity3d.com/partners/google/daydream).
+- Samsung Galaxy Store - Added support for receiving auto-recurring subscriptions
+- Highlights chosen Android store in menu Window > Unity IAP > Android
+
+### Fixed
+- Remove the menu item to select Android store at runtime
+- Fix an exception that occurred when parsing prices while culture was set to use commas as a decimal separator
+
 ## [1.8.3] - 2016-10-13
 ### Fixed
 - iOS crash when calling PurchasingManager.ConfirmPendingPurchase with a product that does not have a transaction ID
-- Ensure tvOS build uses correct correct stub DLL
+- Ensure tvOS build uses correct stub DLL
+- Support transaction receipt logging for all store platforms. Requires corresponding Unity Engine: currently unreleased Unity 5.3/5.4 patch, or Unity 5.5.0b7+.
 
 ## [1.8.2] - 2016-09-23
 ### Fixed

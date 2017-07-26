@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/BrightPassFilterForBloom"
 {
 	Properties 
@@ -11,7 +13,7 @@ Shader "Hidden/BrightPassFilterForBloom"
 	
 	struct v2f 
 	{
-		float4 pos : SV_POSITION;
+		float4 pos : POSITION;
 		float2 uv : TEXCOORD0;
 	};
 	
@@ -23,12 +25,12 @@ Shader "Hidden/BrightPassFilterForBloom"
 	v2f vert( appdata_img v ) 
 	{
 		v2f o;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv =  v.texcoord.xy;
 		return o;
 	} 
 	
-	half4 frag(v2f i) : SV_Target 
+	half4 frag(v2f i) : COLOR 
 	{
 		half4 color = tex2D(_MainTex, i.uv);
 		//color = color * saturate((color-threshhold.x) * 75.0); // didn't go well with HDR and din't make sense
@@ -44,9 +46,11 @@ Shader "Hidden/BrightPassFilterForBloom"
 		Pass 
  		{
 			  ZTest Always Cull Off ZWrite Off
+			  Fog { Mode off }      
 		
 		      CGPROGRAM
 		      
+		      #pragma fragmentoption ARB_precision_hint_fastest
 		      #pragma vertex vert
 		      #pragma fragment frag
 		

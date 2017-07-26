@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/FXAA II" {
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "white" {}
@@ -6,6 +8,7 @@ Properties {
 SubShader {
 	Pass {
 		ZTest Always Cull Off ZWrite Off
+		Fog { Mode off }
 
 CGPROGRAM
 
@@ -13,6 +16,8 @@ CGPROGRAM
 #pragma fragment frag
 #include "UnityCG.cginc"
 #pragma target 3.0
+#pragma glsl
+#pragma exclude_renderers d3d11_9x
 
 #define FXAA_HLSL_3 1
 
@@ -167,14 +172,14 @@ float4 _MainTex_TexelSize;
 v2f vert (appdata_img v)
 {
 	v2f o;
-	o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+	o.pos = UnityObjectToClipPos (v.vertex);
 	o.uv = FxaaVertexShader (v.texcoord.xy*2-1, _MainTex_TexelSize.xy);
 	return o;
 }
 
 sampler2D _MainTex;
 
-float4 frag (v2f i) : SV_Target
+float4 frag (v2f i) : COLOR0
 {
 	return float4(FxaaPixelShader(i.uv, _MainTex, _MainTex_TexelSize.xy).xyz, 0.0f);
 }

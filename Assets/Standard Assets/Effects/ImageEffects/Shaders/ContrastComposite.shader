@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/ContrastComposite" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "" {}
@@ -10,7 +12,7 @@ Shader "Hidden/ContrastComposite" {
 	#include "UnityCG.cginc"
 	
 	struct v2f {
-		float4 pos : SV_POSITION;
+		float4 pos : POSITION;
 		float2 uv[2] : TEXCOORD0;
 	};
 	
@@ -24,7 +26,7 @@ Shader "Hidden/ContrastComposite" {
 		
 	v2f vert( appdata_img v ) {
 		v2f o;
-		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.pos = UnityObjectToClipPos(v.vertex);
 		
 		o.uv[0] = v.texcoord.xy;
 		o.uv[1] = v.texcoord.xy;
@@ -35,7 +37,7 @@ Shader "Hidden/ContrastComposite" {
 		return o;
 	}
 	
-	half4 frag(v2f i) : SV_Target 
+	half4 frag(v2f i) : COLOR 
 	{
 		half4 color = tex2D (_MainTex, i.uv[1]);
 		half4 blurred = tex2D (_MainTexBlurred, (i.uv[0]));
@@ -54,8 +56,10 @@ Shader "Hidden/ContrastComposite" {
 Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
+	  Fog { Mode off }      
 
       CGPROGRAM
+      #pragma fragmentoption ARB_precision_hint_fastest
       #pragma vertex vert
       #pragma fragment frag
       ENDCG
