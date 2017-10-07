@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankIO.Plugins", "TankIO.Plugins.csproj", "{46D0F88F-4FBF-ACC2-4933-708F102BB666}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankIO", "TankIO.csproj", "{B7A52B91-8DDE-275F-67AC-1597455F85B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankIO.Editor.Plugins", "TankIO.Editor.Plugins.csproj", "{82A10DE6-C6EC-EB19-63AC-119AC2C47632}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankIO.Plugins", "TankIO.Plugins.csproj", "{46D0F88F-4FBF-ACC2-4933-708F102BB666}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankIO.Editor", "TankIO.Editor.csproj", "{A4D1A715-16F3-6AC8-3A08-053CE8F33A99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TankIO.Editor.Plugins", "TankIO.Editor.Plugins.csproj", "{82A10DE6-C6EC-EB19-63AC-119AC2C47632}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +15,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B7A52B91-8DDE-275F-67AC-1597455F85B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7A52B91-8DDE-275F-67AC-1597455F85B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7A52B91-8DDE-275F-67AC-1597455F85B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7A52B91-8DDE-275F-67AC-1597455F85B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D0F88F-4FBF-ACC2-4933-708F102BB666}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4D1A715-16F3-6AC8-3A08-053CE8F33A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4D1A715-16F3-6AC8-3A08-053CE8F33A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4D1A715-16F3-6AC8-3A08-053CE8F33A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4D1A715-16F3-6AC8-3A08-053CE8F33A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A10DE6-C6EC-EB19-63AC-119AC2C47632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
